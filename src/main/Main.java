@@ -14,6 +14,7 @@ public class Main {
          opcion = Integer.parseInt(sc.nextLine());
          switch (opcion) {
             case 1: 
+                    //REGISTRO
                     System.out.println("Selecciona un apodo");
                     String apodo = sc.nextLine();
                     System.out.println("Selecciona un nombre");
@@ -24,6 +25,9 @@ public class Main {
                     String correo = sc.nextLine();
                     System.out.println("Selecciona un fecha de nacimiento");
                     String FecNacimiento = sc.nextLine();
+                    String primera = nombre.substring(0,1).toUpperCase();
+                    String segunda = apellido.substring(0,1).toLowerCase();
+                    String clave = primera + segunda + apodo;
                     Usuario usuario = new Usuario(apodo, nombre, apellido, correo, FecNacimiento, clave);
             case 2: System.out.println("Elegiste B"); break;
             case 0: System.out.println("Hasta luego"); break;
