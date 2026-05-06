@@ -15,24 +15,23 @@ public class Main {
          switch (opcion) {
             case 1: 
                     //REGISTRO
-                    System.out.println("Selecciona un apodo");
+                    System.out.println("Selecciona un apodo: ");
                     String apodo = sc.nextLine();
-                    System.out.println("Selecciona un nombre");
+                    System.out.println("Selecciona un nombre: ");
                     String nombre = sc.nextLine();
-                    System.out.println("Selecciona un apellido");
+                    System.out.println("Selecciona un apellido: ");
                     String apellido = sc.nextLine();
-                    System.out.println("Selecciona un correo");
+                    System.out.println("Selecciona un correo: ");
                     String correo = sc.nextLine();
-                    System.out.println("Selecciona un fecha de nacimiento");
+                    System.out.println("Selecciona un fecha de nacimiento: ");
                     String FecNacimiento = sc.nextLine();
-                    String primera = nombre.substring(0,1).toUpperCase();
-                    String segunda = apellido.substring(0,1).toLowerCase();
-                    String clave = primera + segunda + apodo;
-                    Usuario usuario = new Usuario(apodo, nombre, apellido, correo, FecNacimiento, clave);
-            case 2: System.out.println("Elegiste B"); break;
+                    String clave = nombre.substring(0, 1).toUpperCase() + apellido.substring(0, 1).toUpperCase() + apodo;
+                    Usuario usuario = new Usuario(apodo, nombre, apellido, correo, FecNacimiento, clave );
+            case 2: 
+                    System.out.println("Ingrese correo: "); break;
             case 0: System.out.println("Hasta luego"); break;
             default: System.out.println("Opción inválida");
-         } //ola
+         }
         } while (opcion != 0);
         sc.close();
             }
