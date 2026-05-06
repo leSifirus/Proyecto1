@@ -28,7 +28,7 @@ public class Main {
             case 2: System.out.println("Elegiste B"); break;
             case 0: System.out.println("Hasta luego"); break;
             default: System.out.println("Opción inválida");
-         }
+         } //ola
         } while (opcion != 0);
         sc.close();
             }
