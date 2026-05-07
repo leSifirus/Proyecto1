@@ -8,13 +8,13 @@ public class Usuario {
     private String fnacimiento;
     private String clave;
 
-    public Usuario(String nombre, String apellido, String apodo, String correo, String fnacimiento, String clave) {
+    public Usuario(String nombre, String apellido, String apodo, String correo, String fnacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.apodo = apodo;
         this.correo = correo;
         this.fnacimiento = fnacimiento;
-        this.clave = nombre.substring(0, 1).toUpperCase() + apellido.substring(0, 1).toUpperCase() + apodo;
+        this.clave = nombre.substring(0, 1).toUpperCase() + apellido.substring(0, 1).toLowerCase() + apodo;
     }
 
     public String getNombre() {
