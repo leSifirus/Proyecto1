@@ -1,13 +1,17 @@
 package main;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Usuario {
-    //uwuwuwuwuwuwuwpoene
     private String nombre;
     private String apellido;
     private String apodo;
     private String correo;
     private String fnacimiento;
     private String clave;
-
+    LocalDateTime ultimoAcceso;
+    
     public Usuario(String nombre, String apellido, String apodo, String correo, String fnacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -15,6 +19,7 @@ public class Usuario {
         this.correo = correo;
         this.fnacimiento = fnacimiento;
         this.clave = nombre.substring(0, 1).toUpperCase() + apellido.substring(0, 1).toLowerCase() + apodo;
+        this.ultimoAcceso = LocalDateTime.now();
     }
 
     public String getNombre() {
