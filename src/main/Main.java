@@ -8,31 +8,34 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         HashMap<String, Usuario> usuarios = new HashMap<>();
         int opcion;
+        int opPersonaje;
         String correo;
         String nombre = "";
+        
+        
         do {
          System.out.println("\n=== MENU ===");
          System.out.println("1. Para registrarse");
          System.out.println("2. Para iniciar sesion");
          System.out.println("0. Salir");
-         System.out.print("Elige una opciOn: ");
+         System.out.print("Elige una opcion: ");
          opcion = Integer.parseInt(sc.nextLine());
          switch (opcion) {
             case 1: 
                     //REGISTRO
-                    System.out.println("Selecciona un apodo: ");
-                    String apodo = sc.nextLine();
                     System.out.println("Selecciona un nombre: ");
                     nombre = sc.nextLine();
                     System.out.println("Selecciona un apellido: ");
                     String apellido = sc.nextLine();
+                    System.out.println("Selecciona un apodo: ");
+                    String apodo = sc.nextLine();
                     System.out.println("Selecciona un correo: ");
                     correo = sc.nextLine();
                     System.out.println("Selecciona un fecha de nacimiento: ");
                     String FecNacimiento = sc.nextLine();
-                    String  clave = nombre.substring(0, 1).toUpperCase() + apellido.substring(0, 1).toLowerCase() + apodo;
-                    System.out.println("Tu clave es: " + clave + " |||GUARDALA|||");
-                    Usuario usuario = new Usuario(apodo, nombre, apellido, correo, FecNacimiento, clave );
+                    Usuario usuario = new Usuario(nombre, apellido, apodo, correo, FecNacimiento);
+                    System.out.println("Tu clave es: " + usuario.getClave() + " |||GUARDALA|||");
+
                     usuarios.put(correo, usuario);
                     break;
             case 2: 
@@ -40,11 +43,12 @@ public class Main {
                     System.out.println("Ingrese correo: "); 
                     correo = sc.nextLine();
                     System.out.println("Ingrese contraseña: ");
-                    clave = sc.nextLine();
+                    String clave = sc.nextLine();
+                    
                     if (usuarios.containsKey(correo)) {
                         Usuario usuarioRegistrado = usuarios.get(correo);
                         if (usuarioRegistrado.getClave().equals(clave)) {
-                            System.out.println("INICIO DE SESION CORRECTO");
+                            System.out.println("INICIO DE SESION EXITOSO");
                             opcion = 0;
                         }
                         else {
@@ -68,6 +72,34 @@ public class Main {
             System.out.println("4. Ver perfil y estadisticas");
             System.out.println("0. Para salir");
             opcion = Integer.parseInt(sc.nextLine());
+            
+            switch (opcion){
+                case 1: 
+                    System.out.println("===MIS PERSONAJES===");
+                    break;
+                case 2:
+                    System.out.println("===CREAR PERSONAJES===\n");
+                    System.out.println("1. Guerrero");
+                    System.out.println("2. Mago");
+                    System.out.println("3. Arquero");
+                    opPersonaje = Integer.parseInt(sc.nextLine());
+                    
+                    System.out.println("Elige el nombre de tu personaje: ");
+                    String nombrePersonaje = sc.nextLine();
+                    switch (opPersonaje){
+                        case 1: Guerrero guerrero= new Guerrero(70, 120, 50, 20, 1001,nombrePersonaje, 1, 0, "Activo");
+                    }
+                    break;
+                case 3:
+                    System.out.println("===BODEGA===");
+                    break;
+                case 4:
+                    System.out.println("===PERFIL===");
+                    break;
+                case 0:
+                    System.out.println("Adios");
+                    
+            }
             
             
             
