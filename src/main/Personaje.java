@@ -1,4 +1,8 @@
 package main;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Personaje {
    protected int fuerza;
    protected int mana;
@@ -10,6 +14,7 @@ public class Personaje {
    protected int nivel;
    protected int exp;
    protected String estado;
+   LocalDate fechaCreacion;
 
     public Personaje(int fuerza, int mana, int defensa, int agilidad, int vidaHP, String nombre, int nivel, int exp, String estado) {
         this.fuerza = fuerza;
@@ -21,6 +26,15 @@ public class Personaje {
         this.nivel = nivel;
         this.exp = exp;
         this.estado = estado;
+        this.fechaCreacion = LocalDate.now(); 
+    }
+    
+    // [REQUISITOS]: Fechas
+    @Override
+    public String toString(){
+       DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       return "fecha de creacion del personaje: "+ this.fechaCreacion.format(format);
+        
     }
 
     public int getFuerza() {
