@@ -1,4 +1,5 @@
 package main;
+import Personajes.Personaje;
 
 public class Clerigo extends Personaje{
 
