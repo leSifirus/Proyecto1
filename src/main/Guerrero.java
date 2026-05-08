@@ -1,4 +1,6 @@
 package main;
+import Personajes.Personaje;
+
 public class Guerrero extends Personaje {
 
     public Guerrero(int fuerza, int mana, int defensa, int agilidad, int vidaHP, String nombre, int nivel, int exp, String estado) {
