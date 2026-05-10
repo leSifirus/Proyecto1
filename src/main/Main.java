@@ -1,44 +1,55 @@
 package main;
 
-import java.util.Scanner;
-import java.util.HashMap;  
 public class Main {
     public static void main(String[] args) {
         Menu menu = new Menu();
-        int opcion;
+        int opcionInicial;
         
-        switch (menu.menuInicial()) {
-            case 1: 
-                menu.registrarUsuario();
-                break;
-            case 2:
-                if (menu.iniciarSesion() == true){
-            do {
-            opcion = menu.menuJuego();
-            switch (opcion) {
-                case 1:
-                    menu.verPersonajes();
+        do { // do-while principal que lleva el bucle comppleto 
+            opcionInicial = menu.menuInicial();
+            
+            switch (opcionInicial) {
+                case 1: 
+                    menu.registrarUsuario();
                     break;
+                    
                 case 2:
-                    menu.crearPersonaje();
+                    if (menu.iniciarSesion()) {
+                        int opcionJuego;
+                        do { // 2do do-while que lleva el flujo del juego, en el menu principal
+                            opcionJuego = menu.menuJuego();
+                            switch (opcionJuego) {
+                                case 1:
+                                    menu.verPersonajes();
+                                    break;
+                                case 2:
+                                    menu.crearPersonaje();
+                                    break;
+                                case 3:
+                                    menu.verBodega();
+                                    break;
+                                case 4:
+                                    menu.verPerfil();
+                                    break;
+                                case 0:
+                                    System.out.println("Cerrando sesion");
+                                    break;
+                                default:
+                                    System.out.println("Opción no válida");
+                            }
+                        } while (opcionJuego != 0);
+                    } else {
+                        System.out.println("ERROR: Correo o contraseña incorrectos");
+                    }
                     break;
-                case 3:
-                    menu.verBodega();
+                    
+                case 0:
+                    System.out.println("Hasta luego");
                     break;
-                case 4:
-                    menu.verPerfil();
-                    break;
-                }
-            } while (opcion !=1);
-            break;
-        }
-        
-        
-        
-         
-        }
-        
-
-    
-}
+                    
+                default:
+                    System.out.println("Opcion invalida");
+            }
+        } while (opcionInicial != 0);
+    }
 }
