@@ -79,7 +79,7 @@ public class Menu {
             System.out.println("0. Para salir");
         return Integer.parseInt(sc.nextLine());
 
-}
+    }
     public void verPersonajes() {
     System.out.println("\n===MIS PERSONAJES===\n");
     
@@ -98,9 +98,17 @@ public class Menu {
     for (Personaje personaje : p) {
         System.out.printf(i+"- Nombre: "+personaje.getNombre()+", Clase: "+personaje.getClase()+", Nivel: "+personaje.getNivel()+", Estado: "+personaje.getEstado().toUpperCase()+"\n");
         i++;
+        }
     }
-}
     public void crearPersonaje() {
+        ArrayList<Personaje> personajesUsuario = personajes.get(correo);
+        
+        if (personajesUsuario.size() >= 5) {
+            System.out.println("ERROR: Ya tienes el maximo de 5 personajes activos");
+            System.out.println("Debes eliminar o mover a bodega uno antes de crear otro");
+            return;
+        }
+        
         int opcion;
         System.out.println("===CREAR PERSONAJES===\n");
         System.out.println("1. Guerrero");
@@ -110,23 +118,35 @@ public class Menu {
 
         System.out.println("Elige el nombre de tu personaje: ");
         String nombrePersonaje = sc.nextLine();
+        
+        if (nombrePersonaje.length() > 20) { // validacion para que el nombre no tenga mas de 20 caracteres
+            System.out.println("ERROR: El nombre no puede superar los 20 caracteres.");
+            return;
+        }
+
+        // validacion para que el nombre no tenga espacios
+        if (nombrePersonaje.contains(" ")) {
+            System.out.println("ERROR: El nombre no puede contener espacios.");
+            return;
+        }
+        
         switch (opcion){
             case 1:
                 Guerrero guerrero = new Guerrero(70, 120, 50, 20, 1001,nombrePersonaje, 1, 0, "Activo");
-                personajes.get(correo).add(guerrero);
+                personajesUsuario.add(guerrero);
                 break;
 
             case 2:
                 Mago mago = new Mago(45, 280, 30, 30, 740,nombrePersonaje, 1, 0, "Activo");
-                personajes.get(correo).add(mago);
+                personajesUsuario.add(mago);
                 break;
 
             case 3: 
                 Clerigo clerigo = new Clerigo(30, 250, 33, 28, 780,nombrePersonaje, 1, 0, "Activo");
-                personajes.get(correo).add(clerigo);
+                personajesUsuario.add(clerigo);
                 break;
             default: 
-                System.out.println("Clase ");
+                System.out.println("Clase invalida");
                 break;
 }
 }
