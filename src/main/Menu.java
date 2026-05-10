@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.HashMap; 
 public class Menu {
     static String correo; 
+    private Usuario usuarioLogeado;
     Scanner sc = new Scanner(System.in);
     HashMap<String, Usuario> usuarios;
     HashMap<String, ArrayList <Personaje>> personajes = new HashMap<>();
@@ -14,6 +15,7 @@ public class Menu {
     public Menu() {
         this.usuarios = new HashMap<>();
         this.personajes = new HashMap<>();
+        this.usuarioLogeado = null; 
     }
     
     public int menuInicial() {
@@ -37,7 +39,7 @@ public class Menu {
         System.out.println("Selecciona un fecha de nacimiento: ");
         String FecNacimiento = sc.nextLine();
         if (usuarios.size() > 0 && usuarios.containsKey(correo)) {
-            System.out.println("ERROR!! Este correo ya esta registrado");
+            System.out.println("ERROR: Este correo ya esta registrado");
             return;
         }
         Usuario usuario = new Usuario(nombre, apellido, apodo, correo, FecNacimiento);
@@ -47,28 +49,28 @@ public class Menu {
         
     }
     public boolean iniciarSesion() {
-        //INICIO DE SESION
         System.out.println("Ingrese correo: "); 
         correo = sc.nextLine();
         System.out.println("Ingrese contraseña: ");
         String clave = sc.nextLine();
+
         if (usuarios.containsKey(correo)) {
             Usuario usuarioRegistrado = usuarios.get(correo);
             if (usuarioRegistrado.getClave().equals(clave)) {
+                this.usuarioLogeado = usuarioRegistrado;
                 System.out.println("INICIO DE SESION EXITOSO");
                 return true;
-            }
-            else {
+            } else {
+                System.out.println("ERROR: Contraseña incorrecta");
                 return false;
             } 
-        }
-        else {
+        } else {
+            System.out.println("ERROR: El correo no esta registrado");
             return false;
         }             
-            
-    } 
+    }
     public int menuJuego() {
-            System.out.println("\n===BIENVENIDO===");
+            System.out.println("\n===BIENVENIDO " + usuarioLogeado.getNombre().toUpperCase() + "===");
             System.out.println("\n===MENU DE JUEGO===\n");
             System.out.println("1. Ver mis personajes");
             System.out.println("2. Crear personaje");
@@ -79,19 +81,25 @@ public class Menu {
 
 }
     public void verPersonajes() {
-        System.out.println("===MIS PERSONAJES===");
-        ArrayList<Personaje> p = personajes.get(correo); 
-        
-        if (p == null || p.isEmpty()) {
-            System.out.println("No tienes personajes creados.");
-            return;
-        }
-        
-        Collections.sort(p);
-        for (Personaje personaje : p) {
-            System.out.println(personaje.toString());
-        }
+    System.out.println("\n===MIS PERSONAJES===\n");
+    
+    ArrayList<Personaje> p = personajes.get(correo);
+    
+    if (p == null || p.isEmpty()) {
+        System.out.println("No tienes personajes creados.");
+        return;
     }
+    Collections.sort(p);
+    
+    // contador posicion personaje
+    int i = 1;
+    
+    // Mostrar personajes de mayor nivel a menor
+    for (Personaje personaje : p) {
+        System.out.printf(i+"- Nombre: "+personaje.getNombre()+", Clase: "+personaje.getClase()+", Nivel: "+personaje.getNivel()+", Estado: "+personaje.getEstado().toUpperCase()+"\n");
+        i++;
+    }
+}
     public void crearPersonaje() {
         int opcion;
         System.out.println("===CREAR PERSONAJES===\n");
@@ -118,7 +126,7 @@ public class Menu {
                 personajes.get(correo).add(clerigo);
                 break;
             default: 
-                System.out.println("clase no valida");
+                System.out.println("Clase ");
                 break;
 }
 }
