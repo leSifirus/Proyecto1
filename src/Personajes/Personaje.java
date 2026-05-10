@@ -37,7 +37,7 @@ public class Personaje implements Comparable<Personaje>{
        return "fecha de creacion del personaje: "+ this.fechaCreacion.format(format);
         
     }
-
+    // identificador 
     public String getClase() {
         return "Desconocida";
     }
