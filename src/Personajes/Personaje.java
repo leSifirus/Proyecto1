@@ -14,6 +14,7 @@ public class Personaje implements Comparable<Personaje>{
    protected int nivel;
    protected int exp;
    protected String estado;
+   protected String clase;
    LocalDate fechaCreacion;
 
     public Personaje(int fuerza, int mana, int defensa, int agilidad, int vidaHP, String nombre, int nivel, int exp, String estado) {
@@ -36,6 +37,11 @@ public class Personaje implements Comparable<Personaje>{
        return "fecha de creacion del personaje: "+ this.fechaCreacion.format(format);
         
     }
+
+    public String getClase() {
+        return "Desconocida";
+    }
+    
 
     public int getFuerza() {
         return fuerza;
