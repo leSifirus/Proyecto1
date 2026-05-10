@@ -32,11 +32,21 @@ public class Personaje implements Comparable<Personaje>{
     
     // [REQUISITOS]: Fechas
     @Override
-    public String toString(){
-       DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-       return "fecha de creacion del personaje: "+ this.fechaCreacion.format(format);
-        
-    }
+    public String toString() {
+    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    return "Nombre: " + this.nombre + "\n" +
+           "Clase: " + this.getClase() + "\n" +
+           "Nivel: " + this.nivel + "\n" +
+           "Experiencia: " + this.exp + "\n" +
+           "Estado: " + this.estado + "\n" +
+           "Fecha de creacion: " + this.fechaCreacion.format(format) + "\n" +
+           "\n--- ESTADISTICAS ---\n" +
+           "Vida (HP): " + this.vidaHP + "\n" +
+           "Mana: " + this.mana + "\n" +
+           "Fuerza: " + this.fuerza + "\n" +
+           "Defensa: " + this.defensa + "\n" +
+           "Agilidad: " + this.agilidad;
+}
     // identificador 
     public String getClase() {
         return "Desconocida";
