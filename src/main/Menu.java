@@ -90,18 +90,41 @@ public class Menu {
     if (p == null || p.isEmpty()) {
         System.out.println("No tienes personajes creados.");
         return;
-    }
+        }
     Collections.sort(p);
     
     // contador posicion personaje
     int i = 1;
-    
     // Mostrar personajes de mayor nivel a menor
     for (Personaje personaje : p) {
         System.out.printf(i+"- Nombre: "+personaje.getNombre()+", Clase: "+personaje.getClase()+", Nivel: "+personaje.getNivel()+", Estado: "+personaje.getEstado().toUpperCase()+"\n");
         i++;
         }
+    
+    System.out.println("\n[1-" + p.size() + "] Seleccionar personaje para ver detalle");
+    System.out.println("[0] Volver");
+    System.out.print("Opción: ");
+    
+    int seleccion = Integer.parseInt(sc.nextLine());
+    
+    if (seleccion >= 1 && seleccion <= p.size()) {
+        verPersonajeDetalle(p.get(seleccion - 1));
+        } else if (seleccion == 0) {
+            return;
+        } else {
+            System.out.println("Opcion invalida");
+        }
+    
     }
+    
+    public void verPersonajeDetalle(Personaje personaje) {
+    System.out.println("\n===FICHA DE PERSONAJE===");
+    System.out.println(personaje.toString());
+    
+    System.out.println("\nPresiona ENTER para volver");
+    sc.nextLine();
+    }
+    
     public void crearPersonaje() {
         ArrayList<Personaje> personajesUsuario = personajes.get(correo);
         
@@ -151,8 +174,9 @@ public class Menu {
             default: 
                 System.out.println("Clase invalida");
                 break;
-}
-}
+        }
+    }
+    
     
     public void verBodega() {
         System.out.println("===BODEGA===");
