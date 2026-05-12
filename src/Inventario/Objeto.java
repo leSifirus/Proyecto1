@@ -3,18 +3,18 @@ package Inventario;
 public class Objeto {
     private String nombre;
     private String descripcion;
-    private String tipo;
     private Rareza rareza;
     private float peso;
     private int efecto;
+    private tipoObjeto tipo;
 
-    public Objeto(String nombre, String descripcion, String tipo, Rareza rareza, float peso, int efecto) {
+    public Objeto(String nombre, String descripcion,  Rareza rareza, float peso, int efecto, tipoObjeto tipo) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.tipo = tipo;
+        this.descripcion = descripcion; 
         this.rareza = rareza;
         this.peso = peso;
         this.efecto = efecto;
+        this.tipo = tipo;
     }
 
     public String getNombre() {
@@ -33,11 +33,11 @@ public class Objeto {
         this.descripcion = descripcion;
     }
 
-    public String getTipo() {
+    public tipoObjeto getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(tipoObjeto tipo) {
         this.tipo = tipo;
     }
 
