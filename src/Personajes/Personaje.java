@@ -1,9 +1,10 @@
 package Personajes;
 
+import Inventario.Inventario;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Personaje implements Comparable<Personaje>{
+public class Personaje implements Comparable<Personaje> {
    protected int fuerza;
    protected int mana;
    protected int defensa;
@@ -13,11 +14,12 @@ public class Personaje implements Comparable<Personaje>{
    protected String nombre;
    protected int nivel;
    protected int exp;
-   protected String estado;
+   protected estadoPersonaje estado;
    protected String clase;
+   protected Inventario inventario;
    LocalDate fechaCreacion;
 
-    public Personaje(int fuerza, int mana, int defensa, int agilidad, int vidaHP, String nombre, int nivel, int exp, String estado) {
+    public Personaje(int fuerza, int mana, int defensa, int agilidad, int vidaHP, String nombre, int nivel, int exp, estadoPersonaje estado) {
         this.fuerza = fuerza;
         this.mana = mana;
         this.defensa = defensa;
@@ -85,7 +87,15 @@ public class Personaje implements Comparable<Personaje>{
         return exp;
     }
 
-    public String getEstado() {
+    public Inventario getInventario() {
+        return inventario;
+    }
+
+    public void setInventario(Inventario inventario) {
+        this.inventario = inventario;
+    }
+
+    public estadoPersonaje getEstado() {
         return estado;
     }
 
