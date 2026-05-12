@@ -1,8 +1,10 @@
 package Inventario;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Inventario {
+public class Inventario implements Serializable {
+    private static final long serialVersionUID = 1L; 
     private ArrayList<Objeto> objetos;
     private double limPeso;
 
