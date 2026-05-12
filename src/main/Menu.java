@@ -109,8 +109,7 @@ public class Menu {
     
     if (seleccion >= 1 && seleccion <= p.size()) {
         verPersonajeDetalle(p.get(seleccion - 1));
-        } else if (seleccion == 0) {
-            return;
+        } else if (seleccion == 0) {// se devuelve 
         } else {
             System.out.println("Opcion invalida");
         }
