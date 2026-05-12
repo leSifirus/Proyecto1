@@ -12,6 +12,7 @@ public class Personaje implements Comparable<Personaje>, Serializable {
    protected int defensa;
    protected int agilidad;
    protected int vidaHP;
+   protected int oro;
    
    protected String nombre;
    protected int nivel;
@@ -21,12 +22,13 @@ public class Personaje implements Comparable<Personaje>, Serializable {
    protected Inventario inventario;
    LocalDate fechaCreacion;
 
-    public Personaje(int fuerza, int mana, int defensa, int agilidad, int vidaHP, String nombre, int nivel, int exp, estadoPersonaje estado) {
+    public Personaje(int fuerza, int mana, int defensa, int agilidad, int vidaHP, int oro, String nombre, int nivel, int exp, estadoPersonaje estado) {
         this.fuerza = fuerza;
         this.mana = mana;
         this.defensa = defensa;
         this.agilidad = agilidad;
         this.vidaHP = vidaHP;
+        this.oro = oro;
         this.nombre = nombre;
         this.nivel = nivel;
         this.exp = exp;
@@ -44,6 +46,7 @@ public class Personaje implements Comparable<Personaje>, Serializable {
            "Nivel: " + this.nivel + "\n" +
            "Experiencia: " + this.exp + "\n" +
            "Estado: " + this.estado + "\n" +
+           "Oro: " + this.oro + "\n" +
            "Fecha de creacion: " + this.fechaCreacion.format(format) + "\n" +
            "\n===ESTADISTICAS===\n" +
            "Vida (HP): " + this.vidaHP + "\n" +
@@ -94,6 +97,22 @@ public class Personaje implements Comparable<Personaje>, Serializable {
         return inventario;
     }
 
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public int getOro() {
+        return oro;
+    }
+
+    public void setOro(int oro) {
+        this.oro = oro;
+    }
+    
     public void setInventario(Inventario inventario) {
         this.inventario = inventario;
     }
