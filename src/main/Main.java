@@ -27,6 +27,10 @@ public class Main {
                                 case 3:
                                     menu.verPerfil();
                                     break;
+                                case 4:
+                                    menu.verCatalogo();
+                                    
+                                    break;
                                 case 0:
                                     menu.guardarTodo();
                                     System.out.println("Cerrando sesion");
