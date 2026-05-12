@@ -13,11 +13,9 @@ public class Menu {
     private Usuario usuarioLogeado;
     Scanner sc = new Scanner(System.in);
     HashMap<String, Usuario> usuarios;
-    HashMap<String, ArrayList <Personaje>> personajes = new HashMap<>();
 
     public Menu() {
         this.usuarios = new HashMap<>();
-        this.personajes = new HashMap<>();
         this.usuarioLogeado = null; 
     }
     
@@ -48,7 +46,6 @@ public class Menu {
         Usuario usuario = new Usuario(nombre, apellido, apodo, correo, FecNacimiento);
         System.out.println("Tu clave es: " + usuario.getClave() + " |||GUARDALA|||");
         usuarios.put(correo, usuario);
-        personajes.put(correo, new ArrayList<>());
         
     }
     public boolean iniciarSesion() {
@@ -85,13 +82,13 @@ public class Menu {
     public void verPersonajes() {
     System.out.println("\n===MIS PERSONAJES===\n");
     
-    ArrayList<Personaje> p = personajes.get(correo);
+    ArrayList<Personaje> lista = usuarioLogeado.getMisPersonajes();
     
-    if (p == null || p.isEmpty()) {
+    if (lista == null || lista.isEmpty()) {
         System.out.println("No tienes personajes creados.");
         return;
         }
-    Collections.sort(p);
+    Collections.sort(lista);
     
     // contador posicion personaje
     int i = 1;
