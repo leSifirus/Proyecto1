@@ -51,7 +51,7 @@ public class Menu {
             archivo.close();
             System.out.println("Datos cargados.");
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("No hay datos guardados. Se inicia desde cero.");
+            System.out.println("No hay datos guardados.");
             usuarios = new HashMap<>();
         }
     }
