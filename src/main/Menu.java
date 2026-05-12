@@ -46,7 +46,7 @@ public class Menu {
     
     public void cargarTodo() {
         try {
-            ObjectInputStream archivo = new ObjectInputStream(new FileInputStream("datos.dat"));
+            ObjectInputStream archivo = new ObjectInputStream(new FileInputStream("datos_juego.dat"));
             usuarios = (HashMap<String, Usuario>) archivo.readObject();
             archivo.close();
             System.out.println("Datos cargados.");
