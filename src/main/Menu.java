@@ -1,4 +1,7 @@
 package main;
+import Personajes.Guerrero;
+import Personajes.Mago;
+import Personajes.Clerigo;
 import Usuarios.Usuario;
 import Personajes.Personaje;
 import java.util.ArrayList;
