@@ -40,7 +40,7 @@ public class Personaje implements Comparable<Personaje>{
            "Experiencia: " + this.exp + "\n" +
            "Estado: " + this.estado + "\n" +
            "Fecha de creacion: " + this.fechaCreacion.format(format) + "\n" +
-           "\n--- ESTADISTICAS ---\n" +
+           "\n===ESTADISTICAS===\n" +
            "Vida (HP): " + this.vidaHP + "\n" +
            "Mana: " + this.mana + "\n" +
            "Fuerza: " + this.fuerza + "\n" +
