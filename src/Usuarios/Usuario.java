@@ -1,12 +1,12 @@
 package Usuarios;
 
 import Personajes.Personaje;
-import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Usuario implements Serializable{  
-    private static final long serialVersionUID = 1L;
+public class Usuario {
+    private static final long serialVersionUID = 1L;  
     private String nombre;
     private String apellido;
     private String apodo;
