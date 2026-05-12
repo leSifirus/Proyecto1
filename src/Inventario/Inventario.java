@@ -21,6 +21,10 @@ public class Inventario implements Serializable {
         this.limPeso = limPeso;
     }
     
+    public void addObjeto(Objeto p){
+        objetos.add(p);   
+    }
+    
     public void verInventarioCompleto() {
         System.out.println("\n=== INVENTARIO COMPLETO ===");
         if (objetos.isEmpty()) {
