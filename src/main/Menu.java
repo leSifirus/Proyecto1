@@ -2,6 +2,7 @@ package main;
 
 import Inventario.Inventario;
 import Inventario.Objeto;
+import Misiones.Mision;
 import Personajes.Guerrero;
 import Personajes.Mago;
 import Personajes.Clerigo;
@@ -16,12 +17,16 @@ import java.util.HashMap;
 public class Menu {
     static String correo; 
     private Usuario usuarioLogeado;
+    private Mision mision;
+    private ArrayList<Mision> catalogoMisiones;
+    
     Scanner sc = new Scanner(System.in);
     HashMap<String, Usuario> usuarios;
 
     public Menu() {
         this.usuarios = Persistencia.cargar();
         this.usuarioLogeado = null; 
+        this.catalogoMisiones = Mision.crearCatalogo();
     }
     public void guardarTodo() {
         Persistencia.guardar(usuarios);
@@ -82,6 +87,7 @@ public class Menu {
             System.out.println("1. Ver mis personajes e inventarios");
             System.out.println("2. Crear personaje");
             System.out.println("3. Ver perfil y estadisticas");
+            System.out.println("4. para ver catalogo de misiones");
             System.out.println("0. Para salir");
         return Integer.parseInt(sc.nextLine());
 
@@ -163,17 +169,17 @@ public class Menu {
         
         switch (opcion){
             case 1:
-                Guerrero guerrero = new Guerrero(70, 120, 50, 20, 1001,nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
+                Guerrero guerrero = new Guerrero(70, 120, 50, 20, 1001,0, nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
                 usuarioLogeado.agregarPersonaje(guerrero);
                 break;
 
             case 2:
-                Mago mago = new Mago(45, 280, 30, 30, 740,nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
+                Mago mago = new Mago(45, 280, 30, 30, 740,0, nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
                 usuarioLogeado.agregarPersonaje(mago);
                 break;
 
             case 3: 
-                Clerigo clerigo = new Clerigo(30, 250, 33, 28, 780,nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
+                Clerigo clerigo = new Clerigo(30, 250, 33, 28, 780,0, nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
                 usuarioLogeado.agregarPersonaje(clerigo);
                 break;
             default: 
@@ -182,6 +188,80 @@ public class Menu {
         }
         guardarTodo();
     }
+    public void verCatalogo() {
+    System.out.println("\n=== CATALOGO DE MISIONES ===\n");
+    
+    int i = 1;
+    for (Mision m : catalogoMisiones) {
+        System.out.println(i + ". " + m.getNombre() + " | Nivel req: " + m.getNivel() + " | " + m.getOro() + " oro, " + m.getExp() + " exp");
+        i++;
+    }
+    
+    System.out.println("\n[1-" + catalogoMisiones.size() + "] Seleccionar mision");
+    System.out.println("[0] Volver");
+    System.out.print("Opcion: ");
+    
+    int opcion = Integer.parseInt(sc.nextLine());
+    
+    if (opcion >= 1 && opcion <= catalogoMisiones.size()) {
+        Mision misionSeleccionada = catalogoMisiones.get(opcion-1);
+        seleccionarPersonajeMision(misionSeleccionada);
+    } else if (opcion == 0) {// se devuelve
+    } else {
+            System.out.println("Opcion invalida.");
+        }
+    }
+    private void seleccionarPersonajeMision(Mision mision) {
+        System.out.println("\n=== MISION SELECCIONADA ===");
+        System.out.println(mision.toString());
+
+        ArrayList<Personaje> personajes = usuarioLogeado.getMisPersonajes();
+
+        if (personajes.isEmpty()) {
+            System.out.println("\nNo tienes personajes. Crea uno primero.");
+            System.out.println("Presiona ENTER para volver...");
+            sc.nextLine();
+            return;
+        }
+
+        System.out.println("\n=== ELIGE UN PERSONAJE PARA LA MISION ===");
+        int i = 1;
+        for (Personaje p : personajes) {
+            System.out.println(i + ". " + p.getNombre() + " | Clase: " + p.getClase() + " | Nivel: " + p.getNivel() + " | Estado: " + p.getEstado());
+            i++;
+        }
+
+        System.out.println("[0] Volver");
+        System.out.print("Opcion: ");
+
+        int seleccion = Integer.parseInt(sc.nextLine());
+
+        if (seleccion >= 1 && seleccion <= personajes.size()) {
+            Personaje personaje = personajes.get(seleccion - 1);
+
+            if (mision.verificarNivel(personaje)) {
+                completarMision(personaje, mision);
+            } else {
+                System.out.println("\n" + personaje.getNombre() + " es demasiado debil. Necesita nivel " + 
+                                 mision.getNivel() + " (nivel actual: " + personaje.getNivel() + ")");
+            }
+
+        } else if (seleccion == 0) {
+            return;
+        } else {
+            System.out.println("Opcion invalida.");
+        }
+    }
+    private void completarMision(Personaje personaje, Mision mision) {
+        personaje.setExp(personaje.getExp() + mision.getExp());
+        personaje.setOro(personaje.getOro() + mision.getOro());
+        mision.setEstado("COMPLETADA");
+        guardarTodo();
+
+        System.out.println("\nMISION COMPLETADA");
+        System.out.println("+ " + mision.getExp() + " exp | + " + mision.getOro() + " oro");
+    }
+    
     
     public void verPerfil() {
         System.out.println("===PERFIL===");
