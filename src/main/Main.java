@@ -12,7 +12,6 @@ public class Main {
                 case 1: 
                     menu.registrarUsuario();
                     break;
-                    
                 case 2:
                     if (menu.iniciarSesion()) {
                         int opcionJuego;
@@ -26,9 +25,6 @@ public class Main {
                                     menu.crearPersonaje();
                                     break;
                                 case 3:
-                                    //menu.verBodega();
-                                    break;
-                                case 4:
                                     menu.verPerfil();
                                     break;
                                 case 0:
