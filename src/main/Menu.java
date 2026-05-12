@@ -9,6 +9,11 @@ import Personajes.Clerigo;
 import Usuarios.Usuario;
 import Personajes.Personaje;
 import Personajes.estadoPersonaje;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -24,12 +29,31 @@ public class Menu {
     HashMap<String, Usuario> usuarios;
 
     public Menu() {
-        this.usuarios = Persistencia.cargar();
+        cargarTodo();
         this.usuarioLogeado = null; 
         this.catalogoMisiones = Mision.crearCatalogo();
     }
     public void guardarTodo() {
-        Persistencia.guardar(usuarios);
+        try {
+            ObjectOutputStream archivo = new ObjectOutputStream(new FileOutputStream("datos.dat"));
+            archivo.writeObject(usuarios);
+            archivo.close();
+            System.out.println("Datos guardados.");
+        } catch (IOException e) {
+            System.out.println("Error al guardar datos.");
+        }
+    }
+    
+    public void cargarTodo() {
+        try {
+            ObjectInputStream archivo = new ObjectInputStream(new FileInputStream("datos.dat"));
+            usuarios = (HashMap<String, Usuario>) archivo.readObject();
+            archivo.close();
+            System.out.println("Datos cargados.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("No hay datos guardados. Se inicia desde cero.");
+            usuarios = new HashMap<>();
+        }
     }
     
     public int menuInicial() {
