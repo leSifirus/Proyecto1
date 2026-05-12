@@ -61,7 +61,6 @@ public class Menu {
                 System.out.println("INICIO DE SESION EXITOSO");
                 return true;
             } else {
-                System.out.println("ERROR: Contraseña incorrecta");
                 return false;
             } 
         } else {
@@ -119,7 +118,8 @@ public class Menu {
         System.out.println("Elige el nombre de tu personaje: ");
         String nombrePersonaje = sc.nextLine();
         
-        if (nombrePersonaje.length() > 20) { // validacion para que el nombre no tenga mas de 20 caracteres
+        // validacion para que el nombre no tenga mas de 20 caracteres
+        if (nombrePersonaje.length() > 20) { 
             System.out.println("ERROR: El nombre no puede superar los 20 caracteres.");
             return;
         }
@@ -150,6 +150,7 @@ public class Menu {
                 break;
 }
 }
+    
     public void verBodega() {
         System.out.println("===BODEGA===");
         //FALTA
@@ -158,5 +159,4 @@ public class Menu {
         System.out.println("===PERFIL===");
         //FALTA
     }
-    
 }
