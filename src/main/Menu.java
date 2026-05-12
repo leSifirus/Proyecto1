@@ -19,8 +19,12 @@ public class Menu {
     HashMap<String, Usuario> usuarios;
 
     public Menu() {
-        this.usuarios = new HashMap<>();
+        this.usuarios = Persistencia.cargarUsuarios();
         this.usuarioLogeado = null; 
+    }
+    
+    public void guardarTodo() {
+        Persistencia.guardarUsuarios(usuarios);
     }
     
     public int menuInicial() {
@@ -50,6 +54,7 @@ public class Menu {
         Usuario usuario = new Usuario(nombre, apellido, apodo, correo, FecNacimiento);
         System.out.println("Tu clave es: " + usuario.getClave() + " |||GUARDALA|||");
         usuarios.put(correo, usuario);
+        guardarTodo();
         
     }
     public boolean iniciarSesion() {
@@ -109,7 +114,7 @@ public class Menu {
     int seleccion = Integer.parseInt(sc.nextLine());
     
     if (seleccion >= 1 && seleccion <= lista.size()) {
-        verPersonajeDetalle(lista.get(seleccion - 1));
+        verPersonajeDetalle(lista.get(seleccion-1));
         } else if (seleccion == 0) {// se devuelve 
         } else {
             System.out.println("Opcion invalida");
@@ -174,6 +179,7 @@ public class Menu {
                 System.out.println("Clase invalida");
                 break;
         }
+        guardarTodo();
     }
     
     
