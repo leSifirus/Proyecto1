@@ -65,11 +65,7 @@ public class Mision implements Serializable {
         this.estado = estado; 
     }
     public boolean verificarNivel(Personaje personaje) {
-    if (personaje.getNivel() >= this.nivel) {
-        return true;
-    } else {
-        return false;
-    }
+        return personaje.getNivel() >= this.nivel;
 }
 
     @Override
