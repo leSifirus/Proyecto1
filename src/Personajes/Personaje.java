@@ -30,6 +30,7 @@ public class Personaje implements Comparable<Personaje> {
         this.exp = exp;
         this.estado = estado;
         this.fechaCreacion = LocalDate.now(); 
+        this.inventario = new Inventario(50.0);
     }
     
     // [REQUISITOS]: Fechas
