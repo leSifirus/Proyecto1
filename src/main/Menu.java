@@ -1,13 +1,17 @@
 package main;
+
+import Inventario.Objeto;
 import Personajes.Guerrero;
 import Personajes.Mago;
 import Personajes.Clerigo;
 import Usuarios.Usuario;
 import Personajes.Personaje;
+import Personajes.estadoPersonaje;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.HashMap; 
+import java.util.HashMap;
+
 public class Menu {
     static String correo; 
     private Usuario usuarioLogeado;
@@ -73,7 +77,7 @@ public class Menu {
             System.out.println("\n===MENU DE JUEGO===\n");
             System.out.println("1. Ver mis personajes");
             System.out.println("2. Crear personaje");
-            System.out.println("3. Ver bodega de personajes");
+            System.out.println("3. Ver inventario o bodega de personajes");
             System.out.println("4. Ver perfil y estadisticas");
             System.out.println("0. Para salir");
         return Integer.parseInt(sc.nextLine());
@@ -94,7 +98,7 @@ public class Menu {
     int i = 1;
     // Mostrar personajes de mayor nivel a menor
     for (Personaje personaje : lista) {
-        System.out.printf(i+"- Nombre: "+personaje.getNombre()+", Clase: "+personaje.getClase()+", Nivel: "+personaje.getNivel()+", Estado: "+personaje.getEstado().toUpperCase()+"\n");
+        System.out.printf(i+"- Nombre: "+personaje.getNombre()+", Clase: "+personaje.getClase()+", Nivel: "+personaje.getNivel()+", Estado: "+personaje.getEstado() +"\n");
         i++;
         }
     
@@ -110,7 +114,6 @@ public class Menu {
         } else {
             System.out.println("Opcion invalida");
         }
-    
     }
     
     public void verPersonajeDetalle(Personaje personaje) {
@@ -154,17 +157,17 @@ public class Menu {
         
         switch (opcion){
             case 1:
-                Guerrero guerrero = new Guerrero(70, 120, 50, 20, 1001,nombrePersonaje, 1, 0, "Activo");
+                Guerrero guerrero = new Guerrero(70, 120, 50, 20, 1001,nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
                 usuarioLogeado.agregarPersonaje(guerrero);
                 break;
 
             case 2:
-                Mago mago = new Mago(45, 280, 30, 30, 740,nombrePersonaje, 1, 0, "Activo");
+                Mago mago = new Mago(45, 280, 30, 30, 740,nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
                 usuarioLogeado.agregarPersonaje(mago);
                 break;
 
             case 3: 
-                Clerigo clerigo = new Clerigo(30, 250, 33, 28, 780,nombrePersonaje, 1, 0, "Activo");
+                Clerigo clerigo = new Clerigo(30, 250, 33, 28, 780,nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
                 usuarioLogeado.agregarPersonaje(clerigo);
                 break;
             default: 
@@ -174,10 +177,11 @@ public class Menu {
     }
     
     
-    public void verBodega() {
-        System.out.println("===BODEGA===");
-        //FALTA
-    }
+    //public void verInventario() {
+        //ArrayList<Personaje> personajes = usuarioLogeado.getMisPersonajes();
+        //System.out.println("Elija un personaje para ver su inventario y bodega");
+        //System.out.println("1. para ");
+    //}
     public void verPerfil() {
         System.out.println("===PERFIL===");
         //FALTA
