@@ -93,19 +93,19 @@ public class Menu {
     // contador posicion personaje
     int i = 1;
     // Mostrar personajes de mayor nivel a menor
-    for (Personaje personaje : p) {
+    for (Personaje personaje : lista) {
         System.out.printf(i+"- Nombre: "+personaje.getNombre()+", Clase: "+personaje.getClase()+", Nivel: "+personaje.getNivel()+", Estado: "+personaje.getEstado().toUpperCase()+"\n");
         i++;
         }
     
-    System.out.println("\n[1-" + p.size() + "] Seleccionar personaje para ver detalle");
+    System.out.println("\n[1-" + lista.size() + "] Seleccionar personaje para ver detalle");
     System.out.println("[0] Volver");
     System.out.print("Opción: ");
     
     int seleccion = Integer.parseInt(sc.nextLine());
     
-    if (seleccion >= 1 && seleccion <= p.size()) {
-        verPersonajeDetalle(p.get(seleccion - 1));
+    if (seleccion >= 1 && seleccion <= lista.size()) {
+        verPersonajeDetalle(lista.get(seleccion - 1));
         } else if (seleccion == 0) {// se devuelve 
         } else {
             System.out.println("Opcion invalida");
@@ -122,9 +122,9 @@ public class Menu {
     }
     
     public void crearPersonaje() {
-        ArrayList<Personaje> personajesUsuario = personajes.get(correo);
+    ArrayList<Personaje> lista = usuarioLogeado.getMisPersonajes();
         
-        if (personajesUsuario.size() >= 5) {
+        if (lista.size() >= 5) {
             System.out.println("ERROR: Ya tienes el maximo de 5 personajes activos");
             System.out.println("Debes eliminar o mover a bodega uno antes de crear otro");
             return;
@@ -155,17 +155,17 @@ public class Menu {
         switch (opcion){
             case 1:
                 Guerrero guerrero = new Guerrero(70, 120, 50, 20, 1001,nombrePersonaje, 1, 0, "Activo");
-                personajesUsuario.add(guerrero);
+                usuarioLogeado.agregarPersonaje(guerrero);
                 break;
 
             case 2:
                 Mago mago = new Mago(45, 280, 30, 30, 740,nombrePersonaje, 1, 0, "Activo");
-                personajesUsuario.add(mago);
+                usuarioLogeado.agregarPersonaje(mago);
                 break;
 
             case 3: 
                 Clerigo clerigo = new Clerigo(30, 250, 33, 28, 780,nombrePersonaje, 1, 0, "Activo");
-                personajesUsuario.add(clerigo);
+                usuarioLogeado.agregarPersonaje(clerigo);
                 break;
             default: 
                 System.out.println("Clase invalida");
