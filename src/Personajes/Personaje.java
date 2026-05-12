@@ -49,7 +49,7 @@ public class Personaje implements Comparable<Personaje>{
 }
     // identificador 
     public String getClase() {
-        return "Desconocida";
+        return "Ninguna";
     }
     
 
