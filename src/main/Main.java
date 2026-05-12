@@ -26,12 +26,13 @@ public class Main {
                                     menu.crearPersonaje();
                                     break;
                                 case 3:
-                                    menu.verBodega();
+                                    //menu.verBodega();
                                     break;
                                 case 4:
                                     menu.verPerfil();
                                     break;
                                 case 0:
+                                    menu.guardarTodo();
                                     System.out.println("Cerrando sesion");
                                     break;
                                 default:
