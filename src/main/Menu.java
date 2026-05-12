@@ -1,5 +1,6 @@
 package main;
 
+import Inventario.Inventario;
 import Inventario.Objeto;
 import Personajes.Guerrero;
 import Personajes.Mago;
@@ -22,7 +23,6 @@ public class Menu {
         this.usuarios = Persistencia.cargarUsuarios();
         this.usuarioLogeado = null; 
     }
-    
     public void guardarTodo() {
         Persistencia.guardarUsuarios(usuarios);
     }
@@ -55,7 +55,6 @@ public class Menu {
         System.out.println("Tu clave es: " + usuario.getClave() + " |||GUARDALA|||");
         usuarios.put(correo, usuario);
         guardarTodo();
-        
     }
     public boolean iniciarSesion() {
         System.out.println("Ingrese correo: "); 
@@ -80,10 +79,9 @@ public class Menu {
     public int menuJuego() {
             System.out.println("\n===BIENVENIDO " + usuarioLogeado.getNombre().toUpperCase() + "===");
             System.out.println("\n===MENU DE JUEGO===\n");
-            System.out.println("1. Ver mis personajes");
+            System.out.println("1. Ver mis personajes e inventarios");
             System.out.println("2. Crear personaje");
-            System.out.println("3. Ver inventario o bodega de personajes");
-            System.out.println("4. Ver perfil y estadisticas");
+            System.out.println("3. Ver perfil y estadisticas");
             System.out.println("0. Para salir");
         return Integer.parseInt(sc.nextLine());
 
@@ -114,9 +112,11 @@ public class Menu {
     int seleccion = Integer.parseInt(sc.nextLine());
     
     if (seleccion >= 1 && seleccion <= lista.size()) {
-        verPersonajeDetalle(lista.get(seleccion-1));
-        } else if (seleccion == 0) {// se devuelve 
-        } else {
+        verPersonajeDetalle(lista.get(seleccion - 1));
+        }
+    else if (seleccion == 0) {// se devuelve 
+        }
+   else {
             System.out.println("Opcion invalida");
         }
     }
@@ -124,7 +124,8 @@ public class Menu {
     public void verPersonajeDetalle(Personaje personaje) {
     System.out.println("\n===FICHA DE PERSONAJE===");
     System.out.println(personaje.toString());
-    
+    Inventario inventario = personaje.getInventario();
+    inventario.verInventarioCompleto();
     System.out.println("\nPresiona ENTER para volver");
     sc.nextLine();
     }
@@ -182,12 +183,6 @@ public class Menu {
         guardarTodo();
     }
     
-    
-    //public void verInventario() {
-        //ArrayList<Personaje> personajes = usuarioLogeado.getMisPersonajes();
-        //System.out.println("Elija un personaje para ver su inventario y bodega");
-        //System.out.println("1. para ");
-    //}
     public void verPerfil() {
         System.out.println("===PERFIL===");
         //FALTA
