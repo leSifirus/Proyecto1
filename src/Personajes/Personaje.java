@@ -1,10 +1,12 @@
 package Personajes;
 
 import Inventario.Inventario;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Personaje implements Comparable<Personaje> {
+public class Personaje implements Comparable<Personaje>, Serializable {
+   private static final long serialVersionUID = 1L; 
    protected int fuerza;
    protected int mana;
    protected int defensa;
