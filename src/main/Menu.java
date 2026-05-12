@@ -20,11 +20,11 @@ public class Menu {
     HashMap<String, Usuario> usuarios;
 
     public Menu() {
-        this.usuarios = Persistencia.cargarUsuarios();
+        this.usuarios = Persistencia.cargar();
         this.usuarioLogeado = null; 
     }
     public void guardarTodo() {
-        Persistencia.guardarUsuarios(usuarios);
+        Persistencia.guardar(usuarios);
     }
     
     public int menuInicial() {
