@@ -5,7 +5,7 @@ public class Main {
         Menu menu = new Menu();
         int opcionInicial;
         
-        do { // do-while principal que lleva el bucle comppleto 
+        do { // do-while principal que lleva el bucle completo 
             opcionInicial = menu.menuInicial();
             
             switch (opcionInicial) {
