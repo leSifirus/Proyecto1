@@ -26,9 +26,9 @@ public class Inventario implements Serializable {
     }
     
     public void verInventarioCompleto() {
-        System.out.println("\n=== INVENTARIO COMPLETO ===");
+        System.out.println("\n===INVENTARIO COMPLETO===");
         if (objetos.isEmpty()) {
-            System.out.println("El inventario está vacío.");
+            System.out.println("El inventario esta vacio.");
             return;
         }
         
