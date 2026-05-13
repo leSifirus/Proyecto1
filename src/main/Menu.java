@@ -1,7 +1,6 @@
 package main;
 
 import Inventario.Inventario;
-import Inventario.Objeto;
 import Misiones.Mision;
 import Personajes.Guerrero;
 import Personajes.Mago;
@@ -9,11 +8,7 @@ import Personajes.Clerigo;
 import Usuarios.Usuario;
 import Personajes.Personaje;
 import Personajes.estadoPersonaje;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -30,12 +25,11 @@ public class Menu {
 
     public Menu() {
         cargarTodo();
-        this.usuarioLogeado = null; 
         this.catalogoMisiones = Mision.crearCatalogo();
     }
     public void guardarTodo() {
         try {
-            ObjectOutputStream archivo = new ObjectOutputStream(new FileOutputStream("datos.dat"));
+            ObjectOutputStream archivo = new ObjectOutputStream(new FileOutputStream("datos_juego.dat"));
             archivo.writeObject(usuarios);
             archivo.close();
             System.out.println("Datos guardados.");
@@ -213,7 +207,7 @@ public class Menu {
         guardarTodo();
     }
     public void verCatalogo() {
-    System.out.println("\n=== CATALOGO DE MISIONES ===\n");
+    System.out.println("\n===CATALOGO DE MISIONES===\n");
     
     int i = 1;
     for (Mision m : catalogoMisiones) {
@@ -243,12 +237,12 @@ public class Menu {
 
         if (personajes.isEmpty()) {
             System.out.println("\nNo tienes personajes. Crea uno primero.");
-            System.out.println("Presiona ENTER para volver...");
+            System.out.println("Presiona ENTER para volver");
             sc.nextLine();
             return;
         }
 
-        System.out.println("\n=== ELIGE UN PERSONAJE PARA LA MISION ===");
+        System.out.println("\n===ELIGE UN PERSONAJE PARA LA MISION===");
         int i = 1;
         for (Personaje p : personajes) {
             System.out.println(i + ". " + p.getNombre() + " | Clase: " + p.getClase() + " | Nivel: " + p.getNivel() + " | Estado: " + p.getEstado());
@@ -265,11 +259,7 @@ public class Menu {
 
             if (mision.verificarNivel(personaje)) {
                 completarMision(personaje, mision);
-            } else {
-                System.out.println("\n" + personaje.getNombre() + " es demasiado debil. Necesita nivel " + 
-                                 mision.getNivel() + " (nivel actual: " + personaje.getNivel() + ")");
             }
-
         } else if (seleccion == 0) {
             return;
         } else {
