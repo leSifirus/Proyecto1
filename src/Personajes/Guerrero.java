@@ -1,5 +1,4 @@
 package Personajes;
-import Personajes.Personaje;
 
 public class Guerrero extends Personaje {
 
