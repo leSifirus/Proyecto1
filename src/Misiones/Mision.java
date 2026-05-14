@@ -7,12 +7,12 @@ import java.util.ArrayList;
 
 public class Mision implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String nombre;
-    private String descripcion;
-    private int nivel;
-    private int oro;
-    private int exp;
-    private Objeto[] recompensas;
+    private final String nombre;
+    private final String descripcion;
+    private final int nivel;
+    private final int oro;
+    private final int exp;
+    private final Objeto[] recompensas;
     private String estado;
 
     public Mision(String nombre, String descripcion, int nivel, int oro, int exp) {
