@@ -2,9 +2,7 @@ package main;
 
 import Inventario.Inventario;
 import Misiones.Mision;
-import Personajes.Guerrero;
-import Personajes.Mago;
-import Personajes.Clerigo;
+import Personajes.*;
 import Usuarios.Usuario;
 import Personajes.Personaje;
 import Personajes.estadoPersonaje;
@@ -15,10 +13,9 @@ import java.util.Scanner;
 import java.util.HashMap;
 
 public class Menu {
-    static String correo; 
+    
     private Usuario usuarioLogeado;
-    private Mision mision;
-    private ArrayList<Mision> catalogoMisiones;
+    private final ArrayList<Mision> catalogoMisiones;
     
     Scanner sc = new Scanner(System.in);
     HashMap<String, Usuario> usuarios;
@@ -67,10 +64,10 @@ public class Menu {
         System.out.println("Selecciona un apodo: ");
         String apodo = sc.nextLine();
         System.out.println("Selecciona un correo: ");
-        correo = sc.nextLine();
+        String correo = sc.nextLine();
         System.out.println("Selecciona un fecha de nacimiento: ");
         String FecNacimiento = sc.nextLine();
-        if (usuarios.size() > 0 && usuarios.containsKey(correo)) {
+        if (!usuarios.isEmpty() && usuarios.containsKey(correo)) {
             System.out.println("ERROR: Este correo ya esta registrado");
             return;
         }
@@ -81,7 +78,7 @@ public class Menu {
     }
     public boolean iniciarSesion() {
         System.out.println("Ingrese correo: "); 
-        correo = sc.nextLine();
+        String correo = sc.nextLine();
         System.out.println("Ingrese contraseña: ");
         String clave = sc.nextLine();
 
@@ -155,55 +152,71 @@ public class Menu {
     }
     
     public void crearPersonaje() {
-    ArrayList<Personaje> lista = usuarioLogeado.getMisPersonajes();
-        
+        ArrayList<Personaje> lista = usuarioLogeado.getMisPersonajes();
+
         if (lista.size() >= 5) {
             System.out.println("ERROR: Ya tienes el maximo de 5 personajes activos");
             System.out.println("Debes eliminar o mover a bodega uno antes de crear otro");
             return;
         }
-        
+
         int opcion;
-        System.out.println("===CREAR PERSONAJES===\n");
+        System.out.println("\n===CREAR PERSONAJES===\n");
         System.out.println("1. Guerrero");
-        System.out.println("2. Mago");
-        System.out.println("3. Clerigo");
+        System.out.println("2. Clerigo");
+        System.out.println("3. A Distancia:");
+        System.out.println("    4. Arquero");
+        System.out.println("    5. Mago");
+        System.out.print("Elige una opcion: ");
         opcion = Integer.parseInt(sc.nextLine());
 
-        System.out.println("Elige el nombre de tu personaje: ");
+        // Validar que no elijan 3 (solo es categoría)
+        if (opcion == 3) {
+            System.out.println("ERROR: Debes elegir una clase específica (4. Arquero o 5. Mago).");
+            return;
+        }
+
+        // Validar opción válida
+        if (opcion < 1 || opcion > 5) {
+            System.out.println("Clase invalida");
+            return;
+        }
+
+        System.out.print("Elige el nombre de tu personaje: ");
         String nombrePersonaje = sc.nextLine();
-        
-        // validacion para que el nombre no tenga mas de 20 caracteres
-        if (nombrePersonaje.length() > 20) { 
+
+        // Validación nombre
+        if (nombrePersonaje.length() > 20) {
             System.out.println("ERROR: El nombre no puede superar los 20 caracteres.");
             return;
         }
 
-        // validacion para que el nombre no tenga espacios
         if (nombrePersonaje.contains(" ")) {
             System.out.println("ERROR: El nombre no puede contener espacios.");
             return;
         }
-        
-        switch (opcion){
+
+        // Crear según opción
+        switch (opcion) {
             case 1:
-                Guerrero guerrero = new Guerrero(70, 120, 50, 20, 1001,0, nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
+                Guerrero guerrero = new Guerrero(70, 120, 50, 20, 1001, 0, nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
                 usuarioLogeado.agregarPersonaje(guerrero);
                 break;
-
             case 2:
-                Mago mago = new Mago(45, 280, 30, 30, 740,0, nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
-                usuarioLogeado.agregarPersonaje(mago);
-                break;
-
-            case 3: 
-                Clerigo clerigo = new Clerigo(30, 250, 33, 28, 780,0, nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
+                Clerigo clerigo = new Clerigo(30, 250, 33, 28, 780, 0, nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
                 usuarioLogeado.agregarPersonaje(clerigo);
                 break;
-            default: 
-                System.out.println("Clase invalida");
+            case 4:
+                Arquero arquero = new Arquero(90, 100, 22, 35, 690, 0, nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
+                usuarioLogeado.agregarPersonaje(arquero);
+                break;
+            case 5:
+                Mago mago = new Mago(45, 280, 30, 30, 740, 0, nombrePersonaje, 1, 0, estadoPersonaje.ACTIVO);
+                usuarioLogeado.agregarPersonaje(mago);
                 break;
         }
+
+        System.out.println("¡Personaje creado exitosamente!");
         guardarTodo();
     }
     public void verCatalogo() {
@@ -259,9 +272,11 @@ public class Menu {
 
             if (mision.verificarNivel(personaje)) {
                 completarMision(personaje, mision);
+            } else{
+                System.out.println("\nEl personaje "+personaje.getNombre()+" no puede completar la mision");
+                System.out.println("Nivel Requerido: "+mision.getNivel()+", Nivel Actual: "+personaje.getNivel());
             }
-        } else if (seleccion == 0) {
-            return;
+        } else if (seleccion == 0) { // SE DEVUELVE
         } else {
             System.out.println("Opcion invalida.");
         }
