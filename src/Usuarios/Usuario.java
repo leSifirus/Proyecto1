@@ -2,7 +2,6 @@ package Usuarios;
 
 import Personajes.Personaje;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -11,9 +10,9 @@ public class Usuario implements Serializable{
     private String nombre;
     private String apellido;
     private String apodo;
-    private String correo;
+    private final String correo;
     private String fnacimiento;
-    private String clave;
+    private final String clave;
     private ArrayList<Personaje> misPersonajes;
     LocalDateTime ultimoAcceso;
     
