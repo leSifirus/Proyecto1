@@ -1,6 +1,8 @@
 package Misiones;
 
 import Inventario.Objeto;
+import static Inventario.Rareza.*;
+import static Inventario.tipoObjeto.*;
 import Personajes.Personaje;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,7 +14,6 @@ public class Mision implements Serializable {
     private final int nivel;
     private final int oro;
     private final int exp;
-    private final Objeto[] recompensas;
     private String estado;
 
     public Mision(String nombre, String descripcion, int nivel, int oro, int exp) {
@@ -21,11 +22,10 @@ public class Mision implements Serializable {
         this.nivel = nivel;
         this.oro = oro;
         this.exp = exp;
-        this.recompensas = new Objeto[20];
         this.estado = "DISPONIBLE";
     }
 
-    public static ArrayList<Mision> crearCatalogo() {
+    public final static ArrayList<Mision> crearCatalogo() {
         ArrayList<Mision> catalogo = new ArrayList<>();
         
         catalogo.add(new Mision("Derrotar slimes", "Derrota 5 slimes en el bosque", 1, 100, 100));
@@ -41,7 +41,24 @@ public class Mision implements Serializable {
         
         return catalogo;
     }
-
+    public final static ArrayList<Objeto> crearRecompensas() {
+        ArrayList<Objeto> recompensas = new ArrayList<>();
+        //nombre, descripcion, rareza, peso, efecto, tipo
+        
+        recompensas.add(new Objeto("Espada de totsuka", "Espada que sella al cortar", LEGENDARIO, 4, 100, ARMA));
+        recompensas.add(new Objeto("Terrablade", "Energia natural concentrada", EPICO, 3/2, 75, ARMA));
+        recompensas.add(new Objeto("Palo de madera", "Unico uso... luego se rompe", COMUN, 1/2, 2, ARMA));
+        recompensas.add(new Objeto("Escudo de cruz ansata", "Escudo anti cualquier debilidad", LEGENDARIO, 5, 45, ARMADURA));
+        recompensas.add(new Objeto("Gran pocion de vida", "Cura 200HP", RARO, 1, 200, POCION));
+        recompensas.add(new Objeto("Arco tormentas de Dédalo", "Dispara lluvia de flechas", LEGENDARIO, 3, 95, ARMA));
+        recompensas.add(new Objeto("La piedra filosofal", "Cura vida al tenerla equipada", EPICO, 3, 15, MISCELANEO));
+        recompensas.add(new Objeto("Casco de mineria", "Proporciona luz en la oscuridad", COMUN, 2, 20, ARMADURA));
+        recompensas.add(new Objeto("Pocion reutilizable", "Pocion reutilizable cada 2 minutos", RARO, 1, 30, POCION));
+        recompensas.add(new Objeto("La sanguinaria", "Cura vida al atacar", LEGENDARIO, 3, 101, ARMA));
+        
+        
+        return recompensas;
+    }
     public String getNombre() { 
         return nombre; 
     }
