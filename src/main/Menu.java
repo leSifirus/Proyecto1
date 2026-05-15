@@ -1,6 +1,8 @@
 package main;
 
 import Inventario.Inventario;
+import java.util.concurrent.ThreadLocalRandom;
+import Inventario.Objeto;
 import Misiones.Mision;
 import Personajes.*;
 import Usuarios.Usuario;
@@ -16,13 +18,14 @@ public class Menu {
     
     private Usuario usuarioLogeado;
     private final ArrayList<Mision> catalogoMisiones;
+    private final ArrayList<Objeto> recompensas;
     
     Scanner sc = new Scanner(System.in);
     HashMap<String, Usuario> usuarios;
-    //ppppeeeeee
     public Menu() {
         cargarTodo();
         this.catalogoMisiones = Mision.crearCatalogo();
+        this.recompensas = Mision.crearRecompensas();
     }
     public void guardarTodo() {
         try {
@@ -286,9 +289,12 @@ public class Menu {
         personaje.setOro(personaje.getOro() + mision.getOro());
         mision.setEstado("COMPLETADA");
         guardarTodo();
-
+        int numero = ThreadLocalRandom.current().nextInt(0, 10);
+        Objeto recompensa = recompensas.get(numero);
+        
         System.out.println("\nMISION COMPLETADA");
         System.out.println("+ " + mision.getExp() + " exp | + " + mision.getOro() + " oro");
+        System.out.println("OBJETO NUEVO OBTENIDO: "  + recompensa.getNombre() + " Rareza: " + recompensa.getRareza());
     }
     
     
