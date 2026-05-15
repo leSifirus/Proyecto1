@@ -1,8 +1,8 @@
 package Inventario;
 
 public enum tipoObjeto {
-    ARMAS,
+    ARMA,
     ARMADURA,
-    POCIONES,
-    MISCELANEOS
+    POCION,
+    MISCELANEO
 }
