@@ -1,8 +1,9 @@
 package Inventario;
 
+import Personajes.Personaje;
 import java.io.Serializable;
 
-public class Objeto implements Serializable {
+public class Objeto implements Serializable, Usable{
     private static final long serialVersionUID = 1L; 
     private String nombre;
     private String descripcion;
@@ -67,6 +68,34 @@ public class Objeto implements Serializable {
     public void setEfecto(int efecto) {
         this.efecto = efecto;
     }
-    
+     @Override
+     public void usar(Personaje objetivo) {
+        switch (this.tipo) {
+            case POCION:
+                //si es una pocion, el efecto suma vida
+                objetivo.setVidaHP(objetivo.getVidaHP() + this.efecto);
+                System.out.println("Usaste " + this.nombre + ". Recuperaste " + this.efecto + " de vida.");
+                break;
+                
+            case ARMA:
+                // Si es arma, el efecto suma fuerza
+                objetivo.setFuerza(objetivo.getFuerza() + this.efecto);
+                System.out.println("Te equipaste " + this.nombre + ". Tu fuerza aumentó en " + this.efecto + ".");
+                break;
+                
+            case ARMADURA:
+                // Si es armadura, el efecto suma defensa
+                objetivo.setDefensa(objetivo.getDefensa() + this.efecto);
+                System.out.println("Te equipaste " + this.nombre + ". Tu defensa aumentó en " + this.efecto + ".");
+                break;
+                
+            case MISCELANEO:
+                System.out.println("Has examinado " + this.nombre + ": " + this.descripcion);
+                break;
+                
+            default:
+                System.out.println("No puedes usar este objeto.");
+        }
+    }
     
 }
