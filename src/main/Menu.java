@@ -137,14 +137,15 @@ public class Menu {
     int seleccion = Integer.parseInt(sc.nextLine());
     
     if (seleccion >= 1 && seleccion <= lista.size()) {
-        verPersonajeDetalle(lista.get(seleccion - 1));
+        int opcion = verPersonajeDetalle(lista.get(seleccion - 1));
+        gestionarInventario(opcion, lista.get(seleccion - 1));
         }
     else if (seleccion == 6) {
         if (usuarioLogeado.getBodega() == null) {
             System.out.println("No hay objetos en la bodega\n"); 
         }
         else {
-            usuarioLogeado.getBodega().verInventarioCompleto();
+            gestionarBodega();
         }
     }
     else if (seleccion == 0) {// se devuelve 
@@ -162,6 +163,51 @@ public class Menu {
     System.out.println("1- " + inventario.getObjetos().size() + " Para usar o descartar un objeto");
     System.out.println("\n0. para volver");
     return Integer.parseInt(sc.nextLine());
+    }
+    
+    public void gestionarInventario(int opcion, Personaje personaje) {
+        if (opcion == 0) {
+            return;
+        }
+        ArrayList<Objeto> lista = personaje.getInventario().getObjetos();
+        
+        if (opcion > lista.size()) {
+            System.out.println("Este objeto no existe");
+            return;
+        }
+        Objeto objeto = lista.get(opcion - 1);
+        
+        System.out.println("Has seleccionado el objeto: " + objeto.getNombre());
+        System.out.println("1. para usar");
+        System.out.println("2. para eliminar (enviar a bodega)");
+        System.out.println("0. para volver");
+        System.out.println("opcion: ");
+        int seleccion = Integer.parseInt(sc.nextLine());
+        
+        switch (seleccion) {
+            case 1:
+                Objeto sacado = personaje.getInventario().sacarObjeto(opcion - 1);
+                objeto.usar(personaje);
+                System.out.println("\nse elimino este objeto de tu inventario");
+            
+            case 2:
+                Objeto descartado = personaje.getInventario().sacarObjeto(opcion - 1);
+                usuarioLogeado.getBodega().addObjeto(descartado);
+                System.out.println(descartado.getNombre() + " Se ha enviado a bodega");
+        
+            case 3:    
+                return;
+
+            default:
+                System.out.println("elija una opcion valida\n");       
+        }
+        guardarTodo();
+    }
+   
+    public void gestionarBodega() {
+        usuarioLogeado.getBodega().verInventarioCompleto();
+        System.out.println("1- " + usuarioLogeado.getBodega().getObjetos().size() + " Para usar o descartar un objeto");
+        System.out.println("\n0. para volver");
     }
     
     
