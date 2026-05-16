@@ -41,20 +41,20 @@ public class Mision implements Serializable {
         
         return catalogo;
     }
-    public final static ArrayList<Objeto> crearRecompensas() {
-        ArrayList<Objeto> recompensas = new ArrayList<>();
+    public final static Objeto[] crearRecompensas() {
+        Objeto[] recompensas = new Objeto[10];
         //nombre, descripcion, rareza, peso, efecto, tipo
         
-        recompensas.add(new Objeto("Espada de totsuka", "Espada que sella al cortar", LEGENDARIO, 4, 100, ARMA));
-        recompensas.add(new Objeto("Terrablade", "Energia natural concentrada", EPICO, 3/2, 75, ARMA));
-        recompensas.add(new Objeto("Palo de madera", "Unico uso... luego se rompe", COMUN, 1/2, 2, ARMA));
-        recompensas.add(new Objeto("Escudo de cruz ansata", "Escudo anti cualquier debilidad", LEGENDARIO, 5, 45, ARMADURA));
-        recompensas.add(new Objeto("Gran pocion de vida", "Cura 200HP", RARO, 1, 200, POCION));
-        recompensas.add(new Objeto("Arco tormentas de Dédalo", "Dispara lluvia de flechas", LEGENDARIO, 3, 95, ARMA));
-        recompensas.add(new Objeto("La piedra filosofal", "Cura vida al tenerla equipada", EPICO, 3, 15, MISCELANEO));
-        recompensas.add(new Objeto("Casco de mineria", "Proporciona luz en la oscuridad", COMUN, 2, 20, ARMADURA));
-        recompensas.add(new Objeto("Pocion reutilizable", "Pocion reutilizable cada 2 minutos", RARO, 1, 30, POCION));
-        recompensas.add(new Objeto("La sanguinaria", "Cura vida al atacar", LEGENDARIO, 3, 101, ARMA));
+        recompensas[0] = (new Objeto("Espada de totsuka", "Espada que sella al cortar", LEGENDARIO, 4, 100, ARMA));
+        recompensas[1] = (new Objeto("Terrablade", "Energia natural concentrada", EPICO, 3/2, 75, ARMA));
+        recompensas[2] = (new Objeto("Palo de madera", "Unico uso... luego se rompe", COMUN, 1/2, 2, ARMA));
+        recompensas[3] = (new Objeto("Escudo de cruz ansata", "Escudo anti cualquier debilidad", LEGENDARIO, 5, 45, ARMADURA));
+        recompensas[4] = (new Objeto("Gran pocion de vida", "Cura 200HP", RARO, 1, 200, POCION));
+        recompensas[5] = (new Objeto("Arco tormentas de Dédalo", "Dispara lluvia de flechas", LEGENDARIO, 3, 95, ARMA));
+        recompensas[6] = (new Objeto("La piedra filosofal", "Cura vida al tenerla equipada", EPICO, 3, 15, MISCELANEO));
+        recompensas[7] = (new Objeto("Casco de mineria", "Proporciona luz en la oscuridad", COMUN, 2, 20, ARMADURA));
+        recompensas[8] = (new Objeto("Pocion reutilizable", "Pocion reutilizable cada 2 minutos", RARO, 1, 30, POCION));
+        recompensas[9] = (new Objeto("La sanguinaria", "Cura vida al atacar", LEGENDARIO, 3, 101, ARMA));
         
         
         return recompensas;
