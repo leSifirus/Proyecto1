@@ -5,8 +5,9 @@ import java.util.ArrayList;
 
 public class Inventario implements Serializable {
     private static final long serialVersionUID = 1L; 
-    private final ArrayList<Objeto> objetos;
-    private double limPeso;
+    private ArrayList<Objeto> objetos;
+    private static double limPeso;
+    private double pesoActual;
 
     public Inventario(double limPeso) {
         this.objetos = new ArrayList<>();
@@ -17,23 +18,53 @@ public class Inventario implements Serializable {
         return limPeso;
     }
 
-    public void setLimPeso(double limPeso) {
-        this.limPeso = limPeso;
+    public double getPesoActual() {
+        return pesoActual;
+    }
+
+    public void setPesoActual(double pesoActual) {
+        this.pesoActual = pesoActual;
+    }
+
+    public ArrayList<Objeto> getObjetos() {
+        return objetos;
+    }
+   
+    public boolean addObjeto(Objeto nuevoObjeto) {
+    if (this.pesoActual + nuevoObjeto.getPeso() <= this.limPeso) {
+        
+        this.objetos.add(nuevoObjeto);
+        
+        this.pesoActual += nuevoObjeto.getPeso(); 
+        
+        return true; 
     }
     
-    public void addObjeto(Objeto p){
-        objetos.add(p);   
-    }
+    return false; 
+}
     
     public void verInventarioCompleto() {
-        System.out.println("\n===INVENTARIO COMPLETO===");
         if (objetos.isEmpty()) {
             System.out.println("El inventario esta vacio.");
             return;
         }
-        
+        //contador de objetos
+        int i = 0;
         for (Objeto obj : objetos) {
-            System.out.println("- " + obj.getNombre() + " (Tipo: " + obj.getTipo() + ", Peso: " + obj.getPeso() + ")");
+            System.out.println("-" + i + ". obj.getNombre()" + " (Tipo: " + obj.getTipo() + ", Peso: " + obj.getPeso() + ")");
+            i++;
         }
+        System.out.println("Peso actual del inventario: " + pesoActual + "Limite de peso: " + limPeso);
     }
+   public Objeto sacarObjeto(int indice) {
+        if (indice >= 0 && indice < objetos.size()) {
+   
+            Objeto objetoSacado = objetos.remove(indice);
+            
+            return objetoSacado;
+        }
+        return null; // Si el índice no existe
+    }
+    
 }
+    
