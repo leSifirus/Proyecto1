@@ -1,5 +1,6 @@
 package Usuarios;
 
+import Inventario.Inventario;
 import Personajes.Personaje;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ public class Usuario implements Serializable{
     private final String clave;
     private ArrayList<Personaje> misPersonajes;
     LocalDateTime ultimoAcceso;
+    private Inventario bodega;
     
     public Usuario(String nombre, String apellido, String apodo, String correo, String fnacimiento) {
         this.nombre = nombre;
@@ -25,6 +27,7 @@ public class Usuario implements Serializable{
         this.clave = nombre.substring(0, 1).toUpperCase() + apellido.substring(0, 1).toLowerCase() + apodo;
         this.ultimoAcceso = LocalDateTime.now();
         this.misPersonajes = new ArrayList<>();
+        this.bodega = new Inventario(999999.0);
     }
 
     public String getNombre() {
@@ -58,6 +61,10 @@ public class Usuario implements Serializable{
 
     public void agregarPersonaje(Personaje nuevoPersonaje) {
         this.misPersonajes.add(nuevoPersonaje);
+    }
+
+    public Inventario getBodega() {
+        return bodega;
     }
     
     
