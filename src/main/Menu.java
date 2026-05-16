@@ -160,8 +160,8 @@ public class Menu {
     System.out.println(personaje.toString());
     Inventario inventario = personaje.getInventario();
     inventario.verInventarioCompleto();
-    System.out.println("1- " + inventario.getObjetos().size() + " Para usar o descartar un objeto");
-    System.out.println("\n0. para volver");
+    System.out.println("\n1- " + inventario.getObjetos().size() + " Para usar o descartar un objeto");
+    System.out.println("0. para volver");
     return Integer.parseInt(sc.nextLine());
     }
     
