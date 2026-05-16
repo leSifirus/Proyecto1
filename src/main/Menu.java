@@ -18,7 +18,7 @@ public class Menu {
     
     private Usuario usuarioLogeado;
     private final ArrayList<Mision> catalogoMisiones;
-    private final ArrayList<Objeto> recompensas;
+    private final Objeto[] recompensas;
     
     Scanner sc = new Scanner(System.in);
     HashMap<String, Usuario> usuarios;
@@ -130,6 +130,7 @@ public class Menu {
         }
     
     System.out.println("\n[1-" + lista.size() + "] Seleccionar personaje para ver detalle");
+    System.out.println("[6] para ver bodega general");
     System.out.println("[0] Volver");
     System.out.print("Opción: ");
     
@@ -138,6 +139,14 @@ public class Menu {
     if (seleccion >= 1 && seleccion <= lista.size()) {
         verPersonajeDetalle(lista.get(seleccion - 1));
         }
+    else if (seleccion == 6) {
+        if (usuarioLogeado.getBodega() == null) {
+            System.out.println("No hay objetos en la bodega\n"); 
+        }
+        else {
+            usuarioLogeado.getBodega().verInventarioCompleto();
+        }
+    }
     else if (seleccion == 0) {// se devuelve 
         }
    else {
@@ -145,14 +154,16 @@ public class Menu {
         }
     }
     
-    public void verPersonajeDetalle(Personaje personaje) {
+    public int verPersonajeDetalle(Personaje personaje) {
     System.out.println("\n===FICHA DE PERSONAJE===");
     System.out.println(personaje.toString());
     Inventario inventario = personaje.getInventario();
     inventario.verInventarioCompleto();
-    System.out.println("\nPresiona ENTER para volver");
-    sc.nextLine();
+    System.out.println("1- " + inventario.getObjetos().size() + " Para usar o descartar un objeto");
+    System.out.println("\n0. para volver");
+    return Integer.parseInt(sc.nextLine());
     }
+    
     
     public void crearPersonaje() {
         ArrayList<Personaje> lista = usuarioLogeado.getMisPersonajes();
@@ -284,17 +295,27 @@ public class Menu {
             System.out.println("Opcion invalida.");
         }
     }
+    
     private void completarMision(Personaje personaje, Mision mision) {
-        personaje.setExp(personaje.getExp() + mision.getExp());
-        personaje.setOro(personaje.getOro() + mision.getOro());
+        personaje.ganarXP(mision.getExp());
+        personaje.ganarOro(mision.getOro());
         mision.setEstado("COMPLETADA");
-        guardarTodo();
-        int numero = ThreadLocalRandom.current().nextInt(0, 10);
-        Objeto recompensa = recompensas.get(numero);
         
+        //Saca una recompensa aleatoria del array de recompensas
+        int numero = ThreadLocalRandom.current().nextInt(0, 10);
+            Objeto recompensa = recompensas[numero];
+            
         System.out.println("\nMISION COMPLETADA");
         System.out.println("+ " + mision.getExp() + " exp | + " + mision.getOro() + " oro");
+         //Se verifica si la recompensa se puede guardar segun el peso
+        boolean sePudoGuardar = personaje.getInventario().addObjeto(recompensa);
+        if (sePudoGuardar) {
         System.out.println("OBJETO NUEVO OBTENIDO: "  + recompensa.getNombre() + " Rareza: " + recompensa.getRareza());
+        } 
+        else {
+        System.out.println("No tienes espacio. El objeto fue enviado a tu bodega."); 
+        }
+        guardarTodo();
     }
     
     
