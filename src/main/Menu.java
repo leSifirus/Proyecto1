@@ -145,7 +145,7 @@ public class Menu {
             System.out.println("No hay objetos en la bodega\n"); 
         }
         else {
-            gestionarBodega();
+            gestionarBodega(lista.get(seleccion - 1));
         }
     }
     else if (seleccion == 0) {// se devuelve 
@@ -189,25 +189,59 @@ public class Menu {
                 Objeto sacado = personaje.getInventario().sacarObjeto(opcion - 1);
                 objeto.usar(personaje);
                 System.out.println("\nse elimino este objeto de tu inventario");
+                break;
             
             case 2:
                 Objeto descartado = personaje.getInventario().sacarObjeto(opcion - 1);
                 usuarioLogeado.getBodega().addObjeto(descartado);
                 System.out.println(descartado.getNombre() + " Se ha enviado a bodega");
-        
+                break;
             case 3:    
                 return;
 
             default:
-                System.out.println("elija una opcion valida\n");       
+                System.out.println("elija una opcion valida\n");  
+                break;
         }
         guardarTodo();
     }
    
-    public void gestionarBodega() {
+    public void gestionarBodega(Personaje personaje) {
         usuarioLogeado.getBodega().verInventarioCompleto();
-        System.out.println("1- " + usuarioLogeado.getBodega().getObjetos().size() + " Para usar o descartar un objeto");
+        System.out.println("1- " + usuarioLogeado.getBodega().getObjetos().size() + " Para recuperar o eliminar un objeto");
         System.out.println("\n0. para volver");
+        int opcion = Integer.parseInt(sc.nextLine());
+        
+        if (opcion == 0) {
+            return;
+        }
+        else if (opcion >= usuarioLogeado.getBodega().getObjetos().size()) {
+            System.out.println("ERROR, elija un objeto valido");
+        }
+        else {
+            System.out.println("1. para recuperar");
+            System.out.println("2. para eliminar");
+            System.out.println("0. para volver");
+            System.out.println("seleccion: ");
+            int seleccion = Integer.parseInt(sc.nextLine());
+            switch (seleccion) {
+                case 1:
+                    Objeto recuperar = usuarioLogeado.getBodega().getObjetos().get(opcion - 1);
+                    boolean sePudoGuardar = personaje.getInventario().addObjeto(recuperar);
+
+                    if (sePudoGuardar) {
+                        usuarioLogeado.getBodega().sacarObjeto(opcion - 1);
+                        System.out.println("Has recuperado: " + recuperar.getNombre());
+                        guardarTodo(); 
+                    } else {
+                        System.out.println("ERROR, espacio insuficiente en el inventario");
+                    }
+                    break;
+            }
+            
+        }
+                
+        
     }
     
     
@@ -347,7 +381,7 @@ public class Menu {
         personaje.ganarOro(mision.getOro());
         mision.setEstado("COMPLETADA");
         
-        //Saca una recompensa aleatoria del array de recompensas
+        //Saca una recompensa aleatoria del arreglo de recompensas
         int numero = ThreadLocalRandom.current().nextInt(0, 10);
             Objeto recompensa = recompensas[numero];
             
