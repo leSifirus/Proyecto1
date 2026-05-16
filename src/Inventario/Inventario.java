@@ -12,6 +12,7 @@ public class Inventario implements Serializable {
     public Inventario(double limPeso) {
         this.objetos = new ArrayList<>();
         this.limPeso = limPeso;
+        this.pesoActual = 0;
     }
 
     public double getLimPeso() {
