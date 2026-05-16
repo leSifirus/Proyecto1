@@ -1,6 +1,7 @@
 package Usuarios;
 
 import Inventario.Inventario;
+import Inventario.Objeto;
 import Personajes.Personaje;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -66,7 +67,7 @@ public class Usuario implements Serializable{
     public Inventario getBodega() {
         return bodega;
     }
-    
+
     
     
 }
