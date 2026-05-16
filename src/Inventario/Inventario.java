@@ -55,7 +55,7 @@ public class Inventario implements Serializable {
             System.out.println("-" + (i + 1) +  obj.getNombre() + " Tipo: " + obj.getTipo() + ", Peso: " + obj.getPeso() + ")\n");
             i++;
         }
-        System.out.println("\nPeso actual del inventario: " + pesoActual + " Limite de peso: " + limPeso);
+        System.out.println("Peso actual del inventario: " + pesoActual + " Limite de peso: " + limPeso);
     }
    public Objeto sacarObjeto(int indice) {
         if (indice >= 0 && indice < objetos.size()) {
