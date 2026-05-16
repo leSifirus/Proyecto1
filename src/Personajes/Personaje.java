@@ -1,6 +1,7 @@
 package Personajes;
 
 import Inventario.Inventario;
+import Inventario.Objeto;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
