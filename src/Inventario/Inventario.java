@@ -52,7 +52,7 @@ public class Inventario implements Serializable {
         //contador de objetos
         int i = 0;
         for (Objeto obj : objetos) {
-            System.out.println("-" + i + ". obj.getNombre()" + " (Tipo: " + obj.getTipo() + ", Peso: " + obj.getPeso() + ")");
+            System.out.println("-" + (i + 1) + ". obj.getNombre()" + " (Tipo: " + obj.getTipo() + ", Peso: " + obj.getPeso() + ")");
             i++;
         }
         System.out.println("Peso actual del inventario: " + pesoActual + "Limite de peso: " + limPeso);
