@@ -13,13 +13,15 @@ public class Personaje implements Comparable<Personaje>, Serializable {
    protected int agilidad;
    protected int vidaHP;
    protected int oro;
-   
+  
    protected String nombre;
    protected int nivel;
    protected int exp;
    protected estadoPersonaje estado;
    protected String clase;
    protected Inventario inventario;
+   protected boolean enBodega; 
+ 
    LocalDate fechaCreacion;
 
     public Personaje(int fuerza, int mana, int defensa, int agilidad, int vidaHP, int oro, String nombre, int nivel, int exp, estadoPersonaje estado) {
@@ -35,6 +37,7 @@ public class Personaje implements Comparable<Personaje>, Serializable {
         this.estado = estado;
         this.fechaCreacion = LocalDate.now(); 
         this.inventario = new Inventario(50.0);
+        this.enBodega = false;
     }
     
     // [REQUISITOS]: Fechas
@@ -125,8 +128,24 @@ public class Personaje implements Comparable<Personaje>, Serializable {
     public int compareTo(Personaje o) {
        return Integer.compare(o.getNivel(), this.getNivel());
     }
+
+    public void setFuerza(int fuerza) {
+        this.fuerza = fuerza;
+    }
+
+    public void setDefensa(int defensa) {
+        this.defensa = defensa;
+    }
+
+    public void setVidaHP(int vidaHP) {
+        this.vidaHP = vidaHP;
+    }
     
-   
-    
+   public void ganarXP(int xp) {
+       this.exp += xp;
+   }
+   public void ganarOro(int oro) {
+       this.exp += oro;
+   }
    
 }
