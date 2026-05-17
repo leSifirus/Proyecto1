@@ -148,5 +148,13 @@ public class Personaje implements Comparable<Personaje>, Serializable {
    public void ganarOro(int oro) {
        this.exp += oro;
    }
+
+    public void setEnBodega(boolean enBodega) {
+        this.enBodega = enBodega;
+    }
+
+    public boolean isEnBodega() {
+        return enBodega;
+    }
    
 }
