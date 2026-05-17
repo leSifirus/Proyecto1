@@ -125,9 +125,11 @@ public class Menu {
     int i = 1;
     // Mostrar personajes de mayor nivel a menor
     for (Personaje personaje : lista) {
-        System.out.printf(i+"- Nombre: "+personaje.getNombre()+", Clase: "+personaje.getClase()+", Nivel: "+personaje.getNivel()+", Estado: "+personaje.getEstado() +"\n");
-        i++;
+        if (personaje.isEnBodega() == false) {
+            System.out.printf(i+"- Nombre: "+personaje.getNombre()+", Clase: "+personaje.getClase()+", Nivel: "+personaje.getNivel()+", Estado: "+personaje.getEstado() +"\n");
+            i++;
         }
+    }
     
     System.out.println("\n[1-" + lista.size() + "] Seleccionar personaje para ver detalle");
     System.out.println("[6] para ver bodega general");
@@ -138,8 +140,13 @@ public class Menu {
     
     if (seleccion >= 1 && seleccion <= lista.size()) {
         int opcion = verPersonajeDetalle(lista.get(seleccion - 1));
-        gestionarInventario(opcion, lista.get(seleccion - 1));
+        if (opcion == -1 ) {
+            usuarioLogeado.eliminarPersonaje(seleccion - 1);
         }
+        else if (opcion >= 1) {
+            gestionarInventario(opcion, lista.get(seleccion - 1));
+        }
+    }
     else if (seleccion == 6) {
         if (usuarioLogeado.getBodega() == null) {
             System.out.println("No hay objetos en la bodega\n"); 
@@ -161,14 +168,12 @@ public class Menu {
     Inventario inventario = personaje.getInventario();
     inventario.verInventarioCompleto();
     System.out.println("\n1- " + inventario.getObjetos().size() + " Para usar o descartar un objeto");
+    System.out.println("-1. para eliminar este personaje (enviar a bodega)");
     System.out.println("0. para volver");
     return Integer.parseInt(sc.nextLine());
     }
     
     public void gestionarInventario(int opcion, Personaje personaje) {
-        if (opcion == 0) {
-            return;
-        }
         ArrayList<Objeto> lista = personaje.getInventario().getObjetos();
         
         if (opcion > lista.size()) {
@@ -237,11 +242,16 @@ public class Menu {
                         System.out.println("ERROR, espacio insuficiente en el inventario");
                     }
                     break;
+                case 2:
+                    usuarioLogeado.getBodega().getObjetos().remove(opcion - 1);
+                    System.out.println("Se ha eliminado el objeto permanentemente");
+                    break;
+                case 3: 
+                    return;
+                default:
+                    System.out.println("Elija una opcion valida");
             }
-            
         }
-                
-        
     }
     
     
@@ -401,6 +411,6 @@ public class Menu {
     
     public void verPerfil() {
         System.out.println("===PERFIL===");
-        //FALTA
+        
     }
 }
