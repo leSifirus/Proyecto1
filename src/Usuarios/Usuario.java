@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Usuario implements Serializable{
+    public static final int MAX_PERSONAJES_ACTIVOS = 5;
     private static final long serialVersionUID = 1L;  
     private String nombre;
     private String apellido;
@@ -19,6 +20,7 @@ public class Usuario implements Serializable{
     private ArrayList<Personaje> misPersonajes;
     LocalDateTime ultimoAcceso;
     private Inventario bodega;
+    
     
     public Usuario(String nombre, String apellido, String apodo, String correo, String fnacimiento) {
         this.nombre = nombre;

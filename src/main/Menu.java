@@ -340,7 +340,7 @@ public class Menu {
                         }
                     }
 
-                    if (activos >= 5) {
+                    if (activos >= Usuario.MAX_PERSONAJES_ACTIVOS) {
                         System.out.println("ERROR: Ya tienes el maximo de personajes activos. Elimina uno primero");
                     } else {
                         // Se cambia su estado a activo
@@ -361,7 +361,7 @@ public class Menu {
         ArrayList<Personaje> lista = usuarioLogeado.getMisPersonajes();
 
         // Validar maximo de personajes
-        if (lista.size() >= 5) {
+        if (lista.size() >=Usuario.MAX_PERSONAJES_ACTIVOS) {
             System.out.println("ERROR: Ya tienes el maximo de 5 personajes activos");
             System.out.println("Debes eliminar o mover a bodega uno antes de crear otro");
             return;
@@ -568,9 +568,9 @@ public class Menu {
         
         // Mostramos las estadisticas generales
         System.out.println("\n===ESTADISTICAS GENERALES===");
-        System.out.println("Personajes activos: " + cantidadActivos + "/5 permitidos");
-        System.out.println("Oro total acumulado: " + oroTotal);
-        System.out.println("Nivel maximo alcanzado: " + nivelMaximo);
+        System.out.println("Personajes activos: "+cantidadActivos+"/"+Usuario.MAX_PERSONAJES_ACTIVOS);
+        System.out.println("Oro total acumulado: "+oroTotal);
+        System.out.println("Nivel maximo alcanzado: "+nivelMaximo);
         
         System.out.println("\n===HISTORIAL DE MISIONES===");
         if (cantidadActivos == 0) {
