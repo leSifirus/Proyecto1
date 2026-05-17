@@ -1,6 +1,6 @@
 package Personajes;
 
-public class Clerigo extends Personaje{
+public class Clerigo extends Melee{
 
     public Clerigo(int fuerza, int mana, int defensa, int agilidad, int vidaHP,int oro, String nombre, int nivel, int exp, estadoPersonaje estado) {
         super(fuerza, mana, defensa, agilidad, vidaHP,oro, nombre, nivel, exp, estado);

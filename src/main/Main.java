@@ -36,7 +36,7 @@ public class Main {
                                     System.out.println("Cerrando sesion");
                                     break;
                                 default:
-                                    System.out.println("Opción no válida");
+                                    System.out.println("Opcion invalida");
                             }
                         } while (opcionJuego != 0);
                     } else {

@@ -3,6 +3,7 @@ package Usuarios;
 import Inventario.Inventario;
 import Inventario.Objeto;
 import Personajes.Personaje;
+import Personajes.estadoPersonaje;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -69,9 +70,7 @@ public class Usuario implements Serializable{
     }
     
     public void eliminarPersonaje(int seleccion) {
-        misPersonajes.get(seleccion - 1).setEnBodega(true);
-        misPersonajes.remove(seleccion - 1);
-        
+        misPersonajes.get(seleccion - 1).setEstado(estadoPersonaje.ELIMINADO);
     }
 
     

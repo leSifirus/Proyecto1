@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Inventario implements Serializable {
     private static final long serialVersionUID = 1L; 
     private ArrayList<Objeto> objetos;
-    private static double limPeso;
+    private double limPeso;
     private double pesoActual;
 
     public Inventario(double limPeso) {
@@ -46,16 +46,16 @@ public class Inventario implements Serializable {
     
     public void verInventarioCompleto() {
         if (objetos.isEmpty()) {
-            System.out.println("El inventario esta vacio.");
+            System.out.println("\nEl inventario esta vacio");
             return;
         }
         //contador de objetos
         int i = 0;
         for (Objeto obj : objetos) {
-            System.out.println("-" + (i + 1) +  obj.getNombre() + " Tipo: " + obj.getTipo() + ", Peso: " + obj.getPeso() + ")\n");
+            System.out.println("\n" + (i + 1) + ". " +  obj.getNombre() + ", Tipo: " + obj.getTipo() + ", Peso: " + obj.getPeso());
             i++;
         }
-        System.out.println("Peso actual del inventario: " + pesoActual + " Limite de peso: " + limPeso);
+        System.out.println("Peso actual del inventario: " + pesoActual + ", Limite de peso: " + limPeso);
     }
    public Objeto sacarObjeto(int indice) {
         if (indice >= 0 && indice < objetos.size()) {

@@ -2,11 +2,13 @@ package Personajes;
 
 import Inventario.Inventario;
 import Inventario.Objeto;
+import Misiones.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
-public class Personaje implements Comparable<Personaje>, Serializable {
+public abstract class Personaje implements Comparable<Personaje>, Serializable, Rankeable {
    private static final long serialVersionUID = 1L; 
    protected int fuerza;
    protected int mana;
@@ -21,7 +23,8 @@ public class Personaje implements Comparable<Personaje>, Serializable {
    protected estadoPersonaje estado;
    protected String clase;
    protected Inventario inventario;
-   protected boolean enBodega; 
+   protected ArrayList<Mision> historialMisiones;
+
  
    LocalDate fechaCreacion;
 
@@ -38,9 +41,9 @@ public class Personaje implements Comparable<Personaje>, Serializable {
         this.estado = estado;
         this.fechaCreacion = LocalDate.now(); 
         this.inventario = new Inventario(50.0);
-        this.enBodega = false;
+        this.historialMisiones = new ArrayList<>();
     }
-    
+
     // [REQUISITOS]: Fechas
     @Override
     public String toString() {
@@ -58,13 +61,15 @@ public class Personaje implements Comparable<Personaje>, Serializable {
            "Fuerza: " + this.fuerza + "\n" +
            "Defensa: " + this.defensa + "\n" +
            "Agilidad: " + this.agilidad;
-}
+    }
     // identificador 
     public String getClase() {
         return "Ninguna";
     }
+    public ArrayList<Mision> getHistorialMisiones() {
+        return historialMisiones;
+    }
     
-
     public int getFuerza() {
         return fuerza;
     }
@@ -142,19 +147,43 @@ public class Personaje implements Comparable<Personaje>, Serializable {
         this.vidaHP = vidaHP;
     }
     
-   public void ganarXP(int xp) {
-       this.exp += xp;
-   }
-   public void ganarOro(int oro) {
-       this.exp += oro;
-   }
-
-    public void setEnBodega(boolean enBodega) {
-        this.enBodega = enBodega;
+   @Override
+    public void ganarXP(int xp) {
+        this.exp += xp;
+        
+        // se verifica si se alcanza la exp para subir de nivel
+        int xpRequerida = this.nivel * 1000;
+        
+        // Se usa un while por si gana tanta XP de golpe que sube 2 niveles seguidos
+        while (this.exp >= xpRequerida) {
+            subirNivel();
+            xpRequerida = this.nivel * 1000; // Recalcula para el siguiente nivel y asi sucesivamente
+        }
+    }
+    @Override
+    public void subirNivel() {
+        int xpRequerida = this.nivel * 1000;
+        
+        // Restamos la xp usada para subir de nivel, manteniendo el sobrante
+        this.exp -= xpRequerida; 
+        this.nivel++;
+        
+        // Se aumentan la estadisticas
+        this.vidaHP += 50;
+        this.mana += 20;
+        this.fuerza += 10;
+        this.defensa += 10;
+        this.agilidad += 5;
+        
+        System.out.println("Haz subido de nivel\n Tus estadisticas han sido aumentadas");
+    }
+    public void ganarOro(int oro) {
+       this.oro += oro;
     }
 
-    public boolean isEnBodega() {
-        return enBodega;
+    public void setEstado(estadoPersonaje estado) {
+        this.estado = estado;
     }
+
    
 }

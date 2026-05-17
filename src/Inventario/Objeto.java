@@ -74,27 +74,27 @@ public class Objeto implements Serializable, Usable{
             case POCION:
                 //si es una pocion, el efecto suma vida
                 objetivo.setVidaHP(objetivo.getVidaHP() + this.efecto);
-                System.out.println("Usaste " + this.nombre + ". Recuperaste " + this.efecto + " de vida.");
+                System.out.println("\nUsaste " + this.nombre + ". Recuperaste " + this.efecto + " de vida.");
                 break;
                 
             case ARMA:
                 // Si es arma, el efecto suma fuerza
                 objetivo.setFuerza(objetivo.getFuerza() + this.efecto);
-                System.out.println("Te equipaste " + this.nombre + ". Tu fuerza aumentó en " + this.efecto + ".");
+                System.out.println("\nTe equipaste " + this.nombre + ". Tu fuerza aumento en " + this.efecto + ".");
                 break;
                 
             case ARMADURA:
                 // Si es armadura, el efecto suma defensa
                 objetivo.setDefensa(objetivo.getDefensa() + this.efecto);
-                System.out.println("Te equipaste " + this.nombre + ". Tu defensa aumentó en " + this.efecto + ".");
+                System.out.println("\nTe equipaste " + this.nombre + ". Tu defensa aumento en " + this.efecto + ".");
                 break;
                 
             case MISCELANEO:
-                System.out.println("Has examinado " + this.nombre + ": " + this.descripcion);
+                System.out.println("\nHas examinado " + this.nombre + ": " + this.descripcion);
                 break;
                 
             default:
-                System.out.println("No puedes usar este objeto.");
+                System.out.println("\nNo puedes usar este objeto.");
         }
     }
     
