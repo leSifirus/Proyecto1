@@ -67,6 +67,12 @@ public class Usuario implements Serializable{
     public Inventario getBodega() {
         return bodega;
     }
+    
+    public void eliminarPersonaje(int seleccion) {
+        misPersonajes.get(seleccion - 1).setEnBodega(true);
+        misPersonajes.remove(seleccion - 1);
+        
+    }
 
     
     
