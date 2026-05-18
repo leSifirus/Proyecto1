@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class Menu {
     
     private Usuario usuarioLogeado;
-    private final ArrayList<Mision> catalogoMisiones;
+    private final Mision[] catalogoMisiones;
     private final Objeto[] recompensas;
     
     Scanner sc = new Scanner(System.in);
@@ -429,26 +429,26 @@ public class Menu {
         guardarTodo();
     }
     public void verCatalogo() {
-    System.out.println("\n===CATALOGO DE MISIONES===\n");
-    
-    int i = 1;
-    for (Mision m : catalogoMisiones) { // se muestran las misiones 
-        System.out.println(i+". " + m.getNombre()+" | Nivel req: "+m.getNivel()+" | "+m.getOro()+" oro, "+m.getExp()+" exp");
-        i++;
-    }
-    // se elige la mision
-    System.out.println("\n[1-" + catalogoMisiones.size() + "]. Seleccionar mision");
-    System.out.println("0. Volver");
-    System.out.print("Opcion: ");
-    
-    int opcion = Integer.parseInt(sc.nextLine());
-    
-    if (opcion >= 1 && opcion <= catalogoMisiones.size()) { // valida que este dentro del rango y se selecciona el personaje para la mision
-        Mision misionSeleccionada = catalogoMisiones.get(opcion-1);
-        seleccionarPersonajeMision(misionSeleccionada);
-    } else if (opcion == 0) {// se devuelve
-    } else {
-            System.out.println("Opcion invalida.");
+        System.out.println("\n===CATALOGO DE MISIONES===\n");
+        
+        int i = 1;
+        for (Mision m : catalogoMisiones) {
+            System.out.println(i + ". " + m.getNombre() + " | Nivel req: " + m.getNivel() + " | " + m.getOro() + " oro, " + m.getExp() + " exp");
+            i++;
+        }
+        
+        System.out.println("\n[1-" + catalogoMisiones.length + "]. Seleccionar mision");
+        System.out.println("0. Volver");
+        System.out.print("Opcion: ");
+        
+        int opcion = Integer.parseInt(sc.nextLine());
+        
+        if (opcion >= 1 && opcion <= catalogoMisiones.length) {
+            Mision misionSeleccionada = catalogoMisiones[opcion-1];// seleccionamos la mision y procede a la seleccion del personaje
+            seleccionarPersonajeMision(misionSeleccionada);
+        } else if (opcion == 0) { // se devuelve al menu
+        } else {
+            System.out.println("Opcion invalida");
         }
     }
     private void seleccionarPersonajeMision(Mision mision) {
