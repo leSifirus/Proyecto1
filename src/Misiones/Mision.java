@@ -5,7 +5,6 @@ import static Inventario.Rareza.*;
 import static Inventario.tipoObjeto.*;
 import Personajes.Personaje;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Mision implements Serializable {
     private static final long serialVersionUID = 1L;
